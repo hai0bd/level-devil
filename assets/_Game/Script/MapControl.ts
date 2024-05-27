@@ -28,6 +28,9 @@ export class MapControl extends Component {
 export enum CollisionTag{
     TrapPoint = 1,
     FinishPoint = 2,
-    DeathPoint = 3
+    DeathPoint = 3,
+    Food = 4,
+    Bounce = 5,
+    Portal = 6,
 }
 
