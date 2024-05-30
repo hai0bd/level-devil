@@ -23109,12 +23109,12 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -1.2,
+      "x": 0,
       "y": -0.2
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 102.5,
+      "width": 100.1,
       "height": 100.4
     },
     "_id": ""
@@ -23319,13 +23319,13 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -1.2,
-      "y": 0
+      "x": 0.4,
+      "y": -61.3
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 103.7,
-      "height": 100
+      "width": 100.6,
+      "height": 222.6
     },
     "_id": ""
   },
@@ -23342,8 +23342,6 @@
       "__id__": 0
     },
     "fileId": "73qBg1LpRPO4DihgcW9GcC",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
