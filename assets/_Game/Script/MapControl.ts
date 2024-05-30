@@ -1,31 +1,29 @@
-import { _decorator, Animation, Component, Game, Node } from 'cc';
-import { Player } from './Player';
-import { TrapMove } from './TrapMove';
+import { _decorator, Animation, Component, Game, Node } from "cc";
+import { Player } from "./Player";
+import { TrapMove } from "./TrapMove";
 const { ccclass, property } = _decorator;
 
-@ccclass('MapControl')
+@ccclass("MapControl")
 export class MapControl extends Component {
-    
-    @property({type: Player})
+    @property({ type: Player })
     public player: Player | null = null;
-    
-    @property (Animation)
+
+    @property(Animation)
     gateAnim: Animation;
 
-    @property (TrapMove)
+    @property(TrapMove)
     groundTrap: TrapMove;
-    
+
     update(deltaTime: number) {
-        if(this.player.isTrapped){
-            console.log("isTrapped");
+        if (this.player.isTrapped) {
             this.moveTrap();
         }
     }
-    moveTrap(){
+    moveTrap() {
         this.groundTrap.enabled = true;
     }
 }
-export enum CollisionTag{
+export enum CollisionTag {
     TrapPoint = 1,
     FinishPoint = 2,
     DeathPoint = 3,
@@ -33,4 +31,3 @@ export enum CollisionTag{
     Bounce = 5,
     Portal = 6,
 }
-

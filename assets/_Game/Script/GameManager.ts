@@ -1,10 +1,17 @@
-import { _decorator, Animation, Canvas, Component, instantiate, Node, Prefab } from 'cc';
-import { MapControl } from './MapControl';
+import {
+    _decorator,
+    Animation,
+    Canvas,
+    Component,
+    instantiate,
+    Node,
+    Prefab,
+} from "cc";
+import { MapControl } from "./MapControl";
 const { ccclass, property } = _decorator;
 
-@ccclass('GameManager')
+@ccclass("GameManager")
 export class GameManager extends Component {
-
     @property(Node)
     canvas: Node | null = null;
 
@@ -17,7 +24,8 @@ export class GameManager extends Component {
     @property(Animation)
     nextLevelDown: Animation | null = null;
 
-    map: MapControl[] = [];
+    mapControl: MapControl;
+    map: Node;
     levelIndex: number = 0;
 
     start() {
@@ -25,25 +33,25 @@ export class GameManager extends Component {
     }
 
     update(deltaTime: number) {
-        if (this.map[this.levelIndex].player.isWin) {
-            this.map[this.levelIndex].gateAnim.enabled = true;
-            this.map[this.levelIndex].player.playerAnim.node.active = false;
-            
-            this.nextLevelUp.play('next-level-up');
-            this.nextLevelDown.play('next-level-down');
+        if (this.map.activeInHierarchy) console.log(this.map.name);
+        if (this.mapControl.player.isWin) {
+            this.mapControl.gateAnim.enabled = true;
+            this.mapControl.player.playerAnim.node.active = false;
+
+            this.nextLevelUp.play("next-level-up");
+            this.nextLevelDown.play("next-level-down");
 
             this.scheduleOnce(this.nextLevel, 0.67);
-        }
-        else if (this.map[this.levelIndex].player.isLose) {
-            this.map[this.levelIndex].player.node.active = false;
-            this.map[this.levelIndex].player.playerDeathAnim.enabled = true;
+        } else if (this.mapControl.player.isLose) {
+            this.mapControl.player.node.active = false;
+            this.mapControl.player.playerDeathAnim.enabled = true;
             this.scheduleOnce(this.playAgain, 1);
         }
     }
 
     nextLevel() {
-
-        this.map[this.levelIndex].node.active = false;
+        this.map.active = false;
+        this.map.destroy();
         this.levelIndex++;
 
         if (this.levelIndex >= this.mapPrefab.length) {
@@ -54,16 +62,16 @@ export class GameManager extends Component {
     }
 
     playAgain() {
-        this.map[this.levelIndex].node.active = false;
+        this.map.active = false;
+        this.map.destroy();
         this.instantieMap();
     }
 
     instantieMap() {
-        const instanMap = instantiate(this.mapPrefab[this.levelIndex])
-        this.canvas.addChild(instanMap);
-        this.map[this.levelIndex] = instanMap.getComponent(MapControl);
+        this.map = instantiate(this.mapPrefab[this.levelIndex]);
+        this.canvas.addChild(this.map);
+        this.mapControl = this.map.getComponent(MapControl);
         // this.map[this.levelIndex].player.audio = this.audio;
+        console.log("next level");
     }
 }
-
-

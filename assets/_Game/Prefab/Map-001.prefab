@@ -49566,8 +49566,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.7,
-      "y": 0.7,
+      "x": 0.35,
+      "y": 0.35,
       "z": 1
     },
     "_mobility": 0,
@@ -49650,8 +49650,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 20,
-      "height": 52
+      "width": 87,
+      "height": 114
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -49682,12 +49682,12 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 0,
-      "b": 0,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "61100020-5098-48e3-9739-7c5d32affbd5@f9941",
+      "__uuid__": "06714a79-672c-4fd9-a8bf-8fedd5f99fbd@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -49867,13 +49867,13 @@
     "_restitution": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0.4,
-      "y": 1.8
+      "x": -3.3,
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 24.9,
-      "height": 48.4
+      "width": 79.1,
+      "height": 113.6
     },
     "_id": ""
   },
@@ -49908,8 +49908,8 @@
     "playerDeathAnim": {
       "__id__": 2319
     },
-    "speed": 4,
-    "jumpForce": 7,
+    "speed": 6,
+    "jumpForce": 15,
     "_id": ""
   },
   {
