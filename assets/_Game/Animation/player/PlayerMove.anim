@@ -66,26 +66,6 @@
     "_times": [
       0,
       0.05,
-<<<<<<< HEAD
-      0.13333333333333333,
-      0.16666666666666666
-    ],
-    "_values": [
-      {
-        "__uuid__": "619c31c6-e40f-4962-bb91-f3a861b3608d@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "17064492-6daf-49e5-a951-71b8e1c4cd95@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "ded3e278-d944-4072-a029-a62f235d590d@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "619c31c6-e40f-4962-bb91-f3a861b3608d@f9941",
-=======
       0.18333333333333332,
       0.26666666666666666,
       0.3333333333333333
@@ -109,7 +89,6 @@
       },
       {
         "__uuid__": "06714a79-672c-4fd9-a8bf-8fedd5f99fbd@f9941",
->>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
         "__expectedType__": "cc.SpriteFrame"
       }
     ]
@@ -167,16 +146,10 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-<<<<<<< HEAD
-      0.05,
-      0.13333333333333333,
-      0.16666666666666666
-=======
       0,
       0.05,
       0.25,
       0.3333333333333333
->>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
     ],
     "_values": [
       {
@@ -195,19 +168,13 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-<<<<<<< HEAD
-        "value": 0.20000000298023224,
-=======
         "value": 10,
->>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
         "leftTangentWeight": 1,
         "easingMethod": 0,
         "__editorExtras__": null
-<<<<<<< HEAD
-=======
       },
       {
         "__type__": "cc.RealKeyframeValue",
@@ -220,7 +187,6 @@
         "leftTangentWeight": 1,
         "easingMethod": 0,
         "__editorExtras__": null
->>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
       },
       {
         "__type__": "cc.RealKeyframeValue",
