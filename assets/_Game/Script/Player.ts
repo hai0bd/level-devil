@@ -1,11 +1,38 @@
+<<<<<<< HEAD
 import { __private, _decorator, Animation, AnimationClip, BoxCollider2D, CCFloat, CCInteger, Collider2D, Component, Contact2DType, EventKeyboard, Input, input, IPhysics2DContact, KeyCode, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
 import { CollisionTag } from './MapControl';
 import { DeathAnim } from './DeathAnim';
 import { AudioSourceControl, SoundType } from './AudioSourceControl';
 import { TrapMove } from './TrapMove';
+=======
+import {
+    __private,
+    _decorator,
+    Animation,
+    AnimationClip,
+    BoxCollider2D,
+    CCFloat,
+    CCInteger,
+    Collider2D,
+    Component,
+    Contact2DType,
+    EventKeyboard,
+    Input,
+    input,
+    IPhysics2DContact,
+    KeyCode,
+    Node,
+    RigidBody2D,
+    Vec2,
+    Vec3,
+} from "cc";
+import { CollisionTag } from "./MapControl";
+import { DeathAnim } from "./DeathAnim";
+import { AudioSourceControl, SoundType } from "./AudioSourceControl";
+>>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
 const { ccclass, property } = _decorator;
 
-@ccclass('Player')
+@ccclass("Player")
 export class Player extends Component {
     @property({ type: Node })
     startPoint: Node | null = null;
@@ -50,17 +77,29 @@ export class Player extends Component {
     }
 
     getDirection(EventType: EventKeyboard) {
-        if (KeyCode.ARROW_UP == EventType.keyCode || KeyCode.KEY_W == EventType.keyCode) {
+        if (
+            KeyCode.ARROW_UP == EventType.keyCode ||
+            KeyCode.KEY_W == EventType.keyCode
+        ) {
             // this.inputDirection = new Vec2(this.inputDirection.x, 1);
             this.playerJump();
-        }
-        else if (KeyCode.ARROW_LEFT == EventType.keyCode || KeyCode.KEY_A == EventType.keyCode) {
+        } else if (
+            KeyCode.ARROW_LEFT == EventType.keyCode ||
+            KeyCode.KEY_A == EventType.keyCode
+        ) {
             this.canMove = true;
             this.inputDirection = new Vec2(-1, 0);
 
             this.playerAnim.node.setScale(new Vec3(-1, 1, 1));
+<<<<<<< HEAD
         }
         else if (KeyCode.ARROW_RIGHT == EventType.keyCode || KeyCode.KEY_D == EventType.keyCode) {
+=======
+        } else if (
+            KeyCode.ARROW_RIGHT == EventType.keyCode ||
+            KeyCode.KEY_D == EventType.keyCode
+        ) {
+>>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
             this.canMove = true;
             this.inputDirection = new Vec2(1, 0);
 
@@ -72,10 +111,15 @@ export class Player extends Component {
             // this.playerJump();
         } 
         else*/
-        if (KeyCode.ARROW_LEFT == EventType.keyCode || KeyCode.KEY_A == EventType.keyCode) {
+        if (
+            KeyCode.ARROW_LEFT == EventType.keyCode ||
+            KeyCode.KEY_A == EventType.keyCode
+        ) {
             this.canMove = false;
-        }
-        else if (KeyCode.ARROW_RIGHT == EventType.keyCode || KeyCode.KEY_D == EventType.keyCode) {
+        } else if (
+            KeyCode.ARROW_RIGHT == EventType.keyCode ||
+            KeyCode.KEY_D == EventType.keyCode
+        ) {
             this.canMove = false;
         }
     }
@@ -86,17 +130,25 @@ export class Player extends Component {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         }
     }
-    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+    onBeginContact(
+        selfCollider: Collider2D,
+        otherCollider: Collider2D,
+        contact: IPhysics2DContact | null
+    ) {
         const audio = AudioSourceControl.instance;
         if (otherCollider.tag == CollisionTag.TrapPoint) {
+<<<<<<< HEAD
             this.moveTrap(this.isTrapped);
             this.isTrapped++;
         }
         else if (otherCollider.tag == CollisionTag.FinishPoint) {
+=======
+            this.isTrapped = true;
+        } else if (otherCollider.tag == CollisionTag.FinishPoint) {
+>>>>>>> 08e55a99003dbc95a8418b13af9bedeb34f21330
             this.isWin = true;
             audio.playSound(SoundType.E_Sound_Win);
-        }
-        else if (otherCollider.tag == CollisionTag.DeathPoint) {
+        } else if (otherCollider.tag == CollisionTag.DeathPoint) {
             this.isLose = true;
             audio.playSound(SoundType.E_Sound_Die);
         }
@@ -108,10 +160,7 @@ export class Player extends Component {
     update(deltaTime: number) {
         if (this.canMove) {
             this.move();
-        }
-        else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
-
-
+        } else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
     }
 
     move() {
@@ -120,9 +169,12 @@ export class Player extends Component {
         }
         this.node.getPosition(this.playerPos);
         // this.playerPos = new Vec3(this.playerPos.x += (this.inputDirection.x * this.speed), this.playerPos.y += (this.inputDirection.y * this.jumpSpeed), 0);
-        this.playerPos = new Vec3(this.playerPos.x += (this.inputDirection.x * this.speed), this.playerPos.y, 0);
+        this.playerPos = new Vec3(
+            (this.playerPos.x += this.inputDirection.x * this.speed),
+            this.playerPos.y,
+            0
+        );
         this.node.setPosition(this.playerPos);
-
     }
 
     playerJump() {
@@ -142,21 +194,23 @@ export class Player extends Component {
         if (this.isJumping) return;
         this.isJumping = true;
 
-        this.playerRb.applyLinearImpulseToCenter(new Vec2(0, this.jumpForce), true);
+        this.playerRb.applyLinearImpulseToCenter(
+            new Vec2(0, this.jumpForce),
+            true
+        );
 
         if (this.currentAnim != animName) {
             this.currentAnim = animName;
         }
         this.playerAnim.play(animName);
 
-        this.playerAnim.on(Animation.EventType.FINISHED, this.onAnimFinish, this);
+        this.playerAnim.on(
+            Animation.EventType.FINISHED,
+            this.onAnimFinish,
+            this
+        );
     }
     onAnimFinish() {
         this.isJumping = false;
-        console.log("da chay xong anim");
     }
-
-
 }
-
-
