@@ -1,6 +1,7 @@
-import { _decorator, Animation, Component, Game, Node } from 'cc';
+import { _decorator, Animation, Component, Game, Node, RigidBody2D } from 'cc';
 import { Player } from './Player';
 import { TrapMove } from './TrapMove';
+import { DeathAnim } from './DeathAnim';
 const { ccclass, property } = _decorator;
 
 @ccclass('MapControl')
@@ -10,20 +11,20 @@ export class MapControl extends Component {
     public player: Player | null = null;
     
     @property (Animation)
-    gateAnim: Animation;
+    gateAnim: Animation | null = null;
 
-    @property (TrapMove)
-    groundTrap: TrapMove;
+    @property(DeathAnim)
+    playerDeathAnim: DeathAnim;
     
-    update(deltaTime: number) {
-        if(this.player.isTrapped){
+    /* update(deltaTime: number) {
+        if(this.player.isTrapped > 0){
             console.log("isTrapped");
-            this.moveTrap();
+            this.moveTrap(this.player.isTrapped);
         }
     }
-    moveTrap(){
-        this.groundTrap.enabled = true;
-    }
+    moveTrap(index: number){
+        this.groundTrap[index].enabled = true;
+    } */
 }
 export enum CollisionTag{
     TrapPoint = 1,

@@ -2,6 +2,7 @@ import { __private, _decorator, Animation, AnimationClip, BoxCollider2D, CCFloat
 import { CollisionTag } from './MapControl';
 import { DeathAnim } from './DeathAnim';
 import { AudioSourceControl, SoundType } from './AudioSourceControl';
+import { TrapMove } from './TrapMove';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -18,8 +19,8 @@ export class Player extends Component {
     @property(Collider2D)
     playerCollider: Collider2D | null = null;
 
-    @property(DeathAnim)
-    playerDeathAnim: DeathAnim | null = null;
+    @property(TrapMove)
+    trap: TrapMove[] = [];
 
     @property({ type: CCFloat })
     speed: number = 1;
@@ -27,7 +28,7 @@ export class Player extends Component {
     @property({ type: CCInteger })
     jumpForce: number = 1;
 
-    public isTrapped: boolean = false;
+    public isTrapped: number = 0;
     public isWin: boolean = false;
     public isLose: boolean = false;
 
@@ -48,12 +49,6 @@ export class Player extends Component {
         this.colliderEvent();
     }
 
-    init() {
-        this.isLose = false;
-        this.isWin = false;
-        this.isTrapped = false;
-    }
-
     getDirection(EventType: EventKeyboard) {
         if (KeyCode.ARROW_UP == EventType.keyCode || KeyCode.KEY_W == EventType.keyCode) {
             // this.inputDirection = new Vec2(this.inputDirection.x, 1);
@@ -63,13 +58,13 @@ export class Player extends Component {
             this.canMove = true;
             this.inputDirection = new Vec2(-1, 0);
 
-            this.playerAnim.node.setScale(new Vec3(1, 1, 1));
+            this.playerAnim.node.setScale(new Vec3(-1, 1, 1));
         }
         else if (KeyCode.ARROW_RIGHT == EventType.keyCode || KeyCode.KEY_D == EventType.keyCode) {
             this.canMove = true;
             this.inputDirection = new Vec2(1, 0);
 
-            this.playerAnim.node.setScale(new Vec3(-1, 1, 1));
+            this.playerAnim.node.setScale(new Vec3(1, 1, 1));
         }
     }
     offInput(EventType: EventKeyboard) {
@@ -94,7 +89,8 @@ export class Player extends Component {
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         const audio = AudioSourceControl.instance;
         if (otherCollider.tag == CollisionTag.TrapPoint) {
-            this.isTrapped = true;
+            this.moveTrap(this.isTrapped);
+            this.isTrapped++;
         }
         else if (otherCollider.tag == CollisionTag.FinishPoint) {
             this.isWin = true;
@@ -105,6 +101,10 @@ export class Player extends Component {
             audio.playSound(SoundType.E_Sound_Die);
         }
     }
+    moveTrap(index: number) {
+        this.trap[index].enabled = true;
+    }
+
     update(deltaTime: number) {
         if (this.canMove) {
             this.move();
