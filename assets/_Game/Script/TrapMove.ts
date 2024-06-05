@@ -1,16 +1,4 @@
-import {
-    _decorator,
-    CCFloat,
-    CCInteger,
-    Component,
-    Node,
-    PlaceMethod,
-    Sprite,
-    tween,
-    UITransform,
-    Vec2,
-    Vec3,
-} from "cc";
+import { _decorator, CCFloat, Component, Node, tween, Vec3 } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass("TrapMove")
@@ -19,7 +7,7 @@ export class TrapMove extends Component {
     targetNode: Node[] = [];
 
     @property({ type: CCFloat })
-    duration: number = 0;
+    timeSpeed: number = 0;
 
     index: number = 0;
 
@@ -36,7 +24,7 @@ export class TrapMove extends Component {
     movetoTarget() {
         if (this.index >= this.targetNode.length) return;
         tween(this.node.position)
-            .to(this.duration, this.targetNode[this.index].position, {
+            .to(this.timeSpeed, this.targetNode[this.index].position, {
                 onUpdate: (target: Vec3, ratio: number) => {
                     this.node.position = target;
                 },
