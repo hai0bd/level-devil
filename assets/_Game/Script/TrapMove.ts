@@ -8,6 +8,9 @@ export class TrapMove extends Component {
 
     @property({ type: CCFloat })
     timeSpeed: number = 0;
+    
+    @property({ type: CCFloat })
+    delayTime: number = 0;
 
     index: number = 0;
 
@@ -22,13 +25,15 @@ export class TrapMove extends Component {
     }
 
     movetoTarget() {
+        if (this.node == null) return;
         if (this.index >= this.targetNode.length) return;
         tween(this.node.position)
             .to(this.timeSpeed, this.targetNode[this.index].position, {
                 onUpdate: (target: Vec3, ratio: number) => {
-                    this.node.position = target;
+                    if (this.node) this.node.position = target;
                 },
             })
+            .delay(this.delayTime)
             .call(() => {
                 this.index++;
                 this.movetoTarget();

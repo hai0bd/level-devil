@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "Obstacle",
+    "_name": "Princess",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Obstacle",
+    "_name": "Princess",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -28,18 +28,15 @@
       },
       {
         "__id__": 6
-      },
-      {
-        "__id__": 8
       }
     ],
     "_prefab": {
-      "__id__": 10
+      "__id__": 8
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 0.1860000044107437,
+      "y": 74.1729965209961,
       "z": 0
     },
     "_lrot": {
@@ -79,8 +76,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70.5,
-      "height": 20.5
+      "width": 101,
+      "height": 118
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -91,7 +88,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "4aky8BobVPvq/0k8ZOvG9D"
+    "fileId": "1d91p3n1pHR4sHgouisYeS"
   },
   {
     "__type__": "cc.Sprite",
@@ -116,12 +113,12 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a576750d-af75-4c81-9203-590495e404f8@f9941",
+      "__uuid__": "326a9586-c807-41c5-9855-3c0d0edf130e@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -136,10 +133,10 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "51C6Srm6FNFIU9qPLDzvnc"
+    "fileId": "feePUKqypGgpEzXq4G9gPp"
   },
   {
-    "__type__": "cc.RigidBody2D",
+    "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -150,61 +147,22 @@
     "__prefab": {
       "__id__": 7
     },
-    "enabledContactListener": true,
-    "bullet": false,
-    "awakeOnLoad": true,
-    "_group": 1,
-    "_type": 0,
-    "_allowSleep": true,
-    "_gravityScale": 1,
-    "_linearDamping": 0,
-    "_angularDamping": 0,
-    "_linearVelocity": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_angularVelocity": 0,
-    "_fixedRotation": false,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "59Uhsxa1lBzqp6/PxmN+BZ"
-  },
-  {
-    "__type__": "cc.BoxCollider2D",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 9
-    },
-    "tag": 3,
-    "_group": 1,
-    "_density": 1,
-    "_sensor": false,
-    "_friction": 0.2,
-    "_restitution": 0,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 70.5,
-      "height": 20.5
+    "playOnLoad": true,
+    "_clips": [
+      {
+        "__uuid__": "1c1152c5-b106-494a-8f92-0133c108a0d7",
+        "__expectedType__": "cc.AnimationClip"
+      }
+    ],
+    "_defaultClip": {
+      "__uuid__": "1c1152c5-b106-494a-8f92-0133c108a0d7",
+      "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f7ulbCKVFGip247dZbTSO+"
+    "fileId": "09Pp53BWtPNoXSDccwUc8v"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -214,7 +172,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c71vQlI+NOvZizen1JbUEG",
+    "fileId": "08KUI43DhMRYyCfV8cMv+h",
     "instance": null,
     "targetOverrides": null
   }

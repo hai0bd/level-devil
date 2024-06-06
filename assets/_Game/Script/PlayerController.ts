@@ -48,33 +48,44 @@ export class PlayerController extends Component {
 
     getDirection(EventType: EventKeyboard) {
         if (KeyCode.ARROW_UP == EventType.keyCode || KeyCode.KEY_W == EventType.keyCode) {
-            // this.inputDirection = new Vec2(this.inputDirection.x, 1);
             this.playerJump();
         }
         else if (KeyCode.ARROW_LEFT == EventType.keyCode || KeyCode.KEY_A == EventType.keyCode) {
-            this.canMove = true;
-            this.inputDirection = new Vec2(-1, 0);
-
-            this.playerAnim.node.setScale(new Vec3(-1, 1, 1));
+            this.playerMoveLeft();
         }
         else if (KeyCode.ARROW_RIGHT == EventType.keyCode || KeyCode.KEY_D == EventType.keyCode) {
-            this.canMove = true;
-            this.inputDirection = new Vec2(1, 0);
-
-            this.playerAnim.node.setScale(new Vec3(1, 1, 1));
+            this.playerMoveRight();
         }
     }
+    playerJump() {
+        const audio = AudioSourceControl.instance;
+        audio.playSound(SoundType.E_Sound_Jump);
+        this.ChangeAnimJump("PlayerJump");
+    }
+    playerMoveLeft() {
+        this.canMove = true;
+        this.inputDirection = new Vec2(-1, 0);
+
+        this.playerAnim.node.setScale(new Vec3(-1, 1, 1));
+    }
+
+    playerMoveRight() {
+        this.canMove = true;
+        this.inputDirection = new Vec2(1, 0);
+
+        this.playerAnim.node.setScale(new Vec3(1, 1, 1));
+    }
+
     offInput(EventType: EventKeyboard) {
-        /* if (KeyCode.ARROW_UP == EventType.keyCode || KeyCode.KEY_W == EventType.keyCode) {
-            // this.playerJump();
-        } 
-        else*/
         if (KeyCode.ARROW_LEFT == EventType.keyCode || KeyCode.KEY_A == EventType.keyCode) {
-            this.canMove = false;
+            this.stopMove();
         }
         else if (KeyCode.ARROW_RIGHT == EventType.keyCode || KeyCode.KEY_D == EventType.keyCode) {
-            this.canMove = false;
+            this.stopMove();
         }
+    }
+    stopMove() {
+        this.canMove = false;
     }
 
     colliderEvent() {
@@ -88,9 +99,10 @@ export class PlayerController extends Component {
         if (otherCollider.tag == CollisionTag.FinishPoint) {
             this.isWin = true;
             audio.playSound(SoundType.E_Sound_Win);
-        } 
+        }
         else if (otherCollider.tag == CollisionTag.DeathPoint) {
             this.isLose = true;
+            console.log(otherCollider.node.parent.name);
             audio.playSound(SoundType.E_Sound_Die);
         }
     }
@@ -115,11 +127,6 @@ export class PlayerController extends Component {
         this.node.setPosition(this.playerPos);
     }
 
-    playerJump() {
-        const audio = AudioSourceControl.instance;
-        audio.playSound(SoundType.E_Sound_Jump);
-        this.ChangeAnimJump("PlayerJump");
-    }
 
     ChangeAnim(animName: string) {
         if (this.currentAnim != animName) {

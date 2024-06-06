@@ -1,5 +1,6 @@
 import { _decorator, Animation, Component, instantiate, Node, Prefab, UITransform } from "cc";
 import { MapControl } from "./MapControl";
+import { UIManager } from "./UI/UIManager";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -15,6 +16,9 @@ export class GameManager extends Component {
 
     @property(Animation)
     nextLevelDown: Animation | null = null;
+
+    @property(UIManager)
+    uiCanvas: UIManager;
 
     map: Node;
     mapControl: MapControl;
@@ -43,7 +47,7 @@ export class GameManager extends Component {
     }
 
     nextLevel() {
-        this.map.active = false;
+        // this.map.active = false;
         this.map.destroy();
         this.levelIndex++;
 
@@ -55,7 +59,7 @@ export class GameManager extends Component {
     }
 
     playAgain() {
-        this.map.active = false;
+        // this.map.active = false;
         this.map.destroy();
         this.instantieMap();
     }
