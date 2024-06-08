@@ -1,5 +1,5 @@
 import { _decorator, CCFloat, Collider2D, Component, Contact2DType, IPhysics2DContact, tween } from 'cc';
-import { CollisionTag } from './GameManager';
+import { CollisionTag } from './Manager/GameManager';
 import { TrapMove } from './TrapMove';
 const { ccclass, property } = _decorator;
 

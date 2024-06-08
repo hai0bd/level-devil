@@ -1,6 +1,6 @@
 import { _decorator, Animation, CCFloat, CCInteger, Collider2D, Component, Contact2DType, EventKeyboard, Input, input, IPhysics2DContact, KeyCode, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
-import { CollisionTag } from './GameManager';
-import { AudioSourceControl, SoundType } from './AudioSourceControl';
+import { CollisionTag } from './Manager/GameManager';
+import { AudioSourceControl, SoundType } from './Manager/AudioSourceControl';
 import { TrapMove } from './TrapMove';
 const { ccclass, property } = _decorator;
 

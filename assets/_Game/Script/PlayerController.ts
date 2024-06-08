@@ -1,7 +1,6 @@
 import { _decorator, Animation, CCFloat, CCInteger, Collider2D, Component, Contact2DType, EventKeyboard, Input, input, IPhysics2DContact, KeyCode, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
-import { CollisionTag } from './GameManager';
-import { AudioSourceControl, SoundType } from './AudioSourceControl';
-import { TrapMove } from './TrapMove';
+import { CollisionTag } from './Manager/GameManager';
+import { AudioSourceControl, SoundType } from './Manager/AudioSourceControl';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerController')
@@ -24,8 +23,6 @@ export class PlayerController extends Component {
     @property({ type: CCInteger })
     jumpForce: number = 1;
 
-    trapMap: Map<Node, TrapMove> = new Map<Node, TrapMove>();
-
     public isWin: boolean = false;
     public isLose: boolean = false;
 
@@ -46,6 +43,22 @@ export class PlayerController extends Component {
         this.colliderEvent();
     }
 
+    update(deltaTime: number) {
+        if (this.canMove) {
+            this.move();
+        } else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
+    }
+
+    move() {
+        if (!this.isJumping) {
+            this.ChangeAnim("PlayerMove");
+        }
+        this.node.getPosition(this.playerPos);
+        // this.playerPos = new Vec3(this.playerPos.x += (this.inputDirection.x * this.speed), this.playerPos.y += (this.inputDirection.y * this.jumpSpeed), 0);
+        this.playerPos = new Vec3((this.playerPos.x += this.inputDirection.x * this.speed), this.playerPos.y, 0);
+        this.node.setPosition(this.playerPos);
+    }
+
     getDirection(EventType: EventKeyboard) {
         if (KeyCode.ARROW_UP == EventType.keyCode || KeyCode.KEY_W == EventType.keyCode) {
             this.playerJump();
@@ -57,11 +70,7 @@ export class PlayerController extends Component {
             this.playerMoveRight();
         }
     }
-    playerJump() {
-        const audio = AudioSourceControl.instance;
-        audio.playSound(SoundType.E_Sound_Jump);
-        this.ChangeAnimJump("PlayerJump");
-    }
+
     playerMoveLeft() {
         this.canMove = true;
         this.inputDirection = new Vec2(-1, 0);
@@ -74,6 +83,25 @@ export class PlayerController extends Component {
         this.inputDirection = new Vec2(1, 0);
 
         this.playerAnim.node.setScale(new Vec3(1, 1, 1));
+    }
+    playerJump() {
+        if (this.isJumping) return;
+        this.isJumping = true;
+
+        this.PlaySoundEffect(SoundType.E_Sound_Jump)
+
+        this.playerRb.applyLinearImpulseToCenter(new Vec2(0, this.jumpForce), true);
+
+        const animName = "PlayerJump";
+        if (this.currentAnim != animName) {
+            this.currentAnim = animName;
+        }
+        this.playerAnim.play(animName);
+
+        this.playerAnim.on(Animation.EventType.FINISHED, this.onAnimFinish, this);
+    }
+    onAnimFinish() {
+        this.isJumping = false;
     }
 
     offInput(EventType: EventKeyboard) {
@@ -95,38 +123,15 @@ export class PlayerController extends Component {
         }
     }
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
-        const audio = AudioSourceControl.instance;
         if (otherCollider.tag == CollisionTag.FinishPoint) {
             this.isWin = true;
-            audio.playSound(SoundType.E_Sound_Win);
+            this.PlaySoundEffect(SoundType.E_Sound_Win);
         }
         else if (otherCollider.tag == CollisionTag.DeathPoint) {
             this.isLose = true;
-            console.log(otherCollider.node.parent.name);
-            audio.playSound(SoundType.E_Sound_Die);
+            this.PlaySoundEffect(SoundType.E_Sound_Die);
         }
     }
-
-    update(deltaTime: number) {
-        if (this.canMove) {
-            this.move();
-        } else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
-    }
-
-    move() {
-        if (!this.isJumping) {
-            this.ChangeAnim("PlayerMove");
-        }
-        this.node.getPosition(this.playerPos);
-        // this.playerPos = new Vec3(this.playerPos.x += (this.inputDirection.x * this.speed), this.playerPos.y += (this.inputDirection.y * this.jumpSpeed), 0);
-        this.playerPos = new Vec3(
-            (this.playerPos.x += this.inputDirection.x * this.speed),
-            this.playerPos.y,
-            0
-        );
-        this.node.setPosition(this.playerPos);
-    }
-
 
     ChangeAnim(animName: string) {
         if (this.currentAnim != animName) {
@@ -135,21 +140,9 @@ export class PlayerController extends Component {
         }
     }
 
-    ChangeAnimJump(animName: string) {
-        if (this.isJumping) return;
-        this.isJumping = true;
-
-        this.playerRb.applyLinearImpulseToCenter(new Vec2(0, this.jumpForce), true);
-
-        if (this.currentAnim != animName) {
-            this.currentAnim = animName;
-        }
-        this.playerAnim.play(animName);
-
-        this.playerAnim.on(Animation.EventType.FINISHED, this.onAnimFinish, this);
-    }
-    onAnimFinish() {
-        this.isJumping = false;
+    PlaySoundEffect(soundName: SoundType) {
+        const audio = AudioSourceControl.instance;
+        audio.playSound(soundName);
     }
 }
 

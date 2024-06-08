@@ -1,5 +1,5 @@
 import { _decorator, Button, Component, Input, Node } from 'cc';
-import { GameManager } from '../GameManager';
+import { GameManager } from '../Manager/GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('ButtonMove')
@@ -17,8 +17,8 @@ export class ButtonMove extends Component {
     buttonJump: Button;
 
     start() {
-        this.checkStartEvent();
         this.checkEndEvent();
+        this.checkStartEvent();
     }
     checkStartEvent() {
         this.buttonLeft.node.on(Input.EventType.TOUCH_START, this.onClickButtonLeft, this);
@@ -28,6 +28,8 @@ export class ButtonMove extends Component {
     checkEndEvent() {
         this.buttonLeft.node.on(Input.EventType.TOUCH_END, this.offClickButton, this);
         this.buttonRight.node.on(Input.EventType.TOUCH_END, this.offClickButton, this);
+        this.buttonLeft.node.on(Input.EventType.TOUCH_CANCEL, this.offClickButton, this);
+        this.buttonRight.node.on(Input.EventType.TOUCH_CANCEL, this.offClickButton, this);
     }
 
     onClickButtonLeft() {

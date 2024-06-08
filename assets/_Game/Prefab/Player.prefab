@@ -354,6 +354,7 @@
       "__id__": 17
     },
     "startPoint": null,
+    "groundNode": null,
     "playerAnim": {
       "__id__": 7
     },
