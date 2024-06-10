@@ -1,6 +1,7 @@
 import { _decorator, CCFloat, Collider2D, Component, Contact2DType, IPhysics2DContact, tween } from 'cc';
 import { CollisionTag } from './Manager/GameManager';
 import { TrapMove } from './TrapMove';
+import { AudioSourceControl, SoundType } from './Manager/AudioSourceControl';
 const { ccclass, property } = _decorator;
 
 @ccclass('TrapSensor')
@@ -41,6 +42,7 @@ export class TrapSensor extends Component {
     }
 
     enableTrap() {
+        this.playSfx(SoundType.Trap_Move);
         if (this.index >= this.trapMove.length) return;
         tween(this.node)
             .delay(this.timeDelay)
@@ -51,6 +53,9 @@ export class TrapSensor extends Component {
             })
             .start();
     }
-
+    playSfx(sound: SoundType){
+        const audio = AudioSourceControl.instance;
+        audio.playSound(sound);
+    }
 }
 

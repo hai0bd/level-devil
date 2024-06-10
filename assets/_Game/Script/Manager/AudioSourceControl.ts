@@ -8,13 +8,19 @@ export class AudioSourceControl extends Component {
     backgroundMusic: AudioClip = null; */
 
     @property({ type: AudioClip })
-    jumpSound: AudioClip = null;
+    jumpSfx: AudioClip = null;
 
     @property({ type: AudioClip })
-    dieSound: AudioClip = null;
+    dieSfx: AudioClip = null;
 
     @property({ type: AudioClip })
-    winSound: AudioClip = null;
+    winSfx: AudioClip = null;
+
+    @property(AudioClip)
+    trapMoverment: AudioClip = null;
+
+    @property(AudioClip)
+    buttonClickSfx: AudioClip = null;
 
     @property(AudioSource)
     soundEffectSource: AudioSource | null = null;
@@ -39,13 +45,19 @@ export class AudioSourceControl extends Component {
             let clipToPlay: AudioClip | null = null;
             switch (type) {
                 case SoundType.E_Sound_Jump:
-                    clipToPlay = this.jumpSound;
+                    clipToPlay = this.jumpSfx;
                     break;
                 case SoundType.E_Sound_Die:
-                    clipToPlay = this.dieSound;
+                    clipToPlay = this.dieSfx;
                     break;
                 case SoundType.E_Sound_Win:
-                    clipToPlay = this.winSound;
+                    clipToPlay = this.winSfx;
+                    break;
+                case SoundType.Trap_Move:
+                    clipToPlay = this.trapMoverment;
+                    break;
+                case SoundType.Button_Click:
+                    clipToPlay = this.buttonClickSfx;
                     break;
             }
             if (clipToPlay) {
@@ -58,5 +70,7 @@ export class AudioSourceControl extends Component {
 export enum SoundType {
     E_Sound_Jump = 1,
     E_Sound_Die = 2,
-    E_Sound_Win = 3
+    E_Sound_Win = 3,
+    Trap_Move = 4,
+    Button_Click = 5
 }

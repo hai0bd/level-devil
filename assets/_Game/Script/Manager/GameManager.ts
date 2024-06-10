@@ -24,7 +24,7 @@ export class GameManager extends Component {
     mapControl: MapControl;
     levelIndex: number = 0;
 
-    start() {
+    init() {
         this.instantieMap();
     }
 
