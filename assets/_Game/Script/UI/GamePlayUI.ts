@@ -10,6 +10,10 @@ export class GamePlayUI extends Component {
     @property(Node)
     settingNode: Node = null;
 
+    onClickEsc(){
+        this.node.active = false;
+    }
+
     onButtonReplay() {
         this.gameManager.playAgain();
     }

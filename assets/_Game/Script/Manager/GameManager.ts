@@ -1,6 +1,6 @@
 import { _decorator, Animation, Component, instantiate, Node, Prefab, UITransform } from "cc";
-import { MapControl } from "../MapControl";
 import { UIManager } from "../UI/UIManager";
+import { MapControl } from "../Node/MapControl";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -24,11 +24,19 @@ export class GameManager extends Component {
     mapControl: MapControl;
     levelIndex: number = 0;
 
-    init() {
-        this.instantieMap();
+    instantieGate(index: number) {
+        this.map = instantiate(this.mapPrefab[index])
+        this.canvas.addChild(this.map);
+        // this.mapControl = this.map.getComponent(MapControl);
+        // this.map[this.levelIndex].player.audio = this.audio;
+        // console.log("next level");
     }
 
-    update(deltaTime: number) {
+    update() {
+
+    }
+
+    /* update(deltaTime: number) {
         const player = this.mapControl.player;
         if (player.isWin) {
             player.playerAnim.node.active = false;
@@ -70,7 +78,8 @@ export class GameManager extends Component {
         this.mapControl = this.map.getComponent(MapControl);
         // this.map[this.levelIndex].player.audio = this.audio;
         console.log("next level");
-    }
+    } */
+
 
 }
 export enum CollisionTag {

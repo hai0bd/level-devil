@@ -5,36 +5,39 @@ const { ccclass, property } = _decorator;
 
 @ccclass('MainMenu')
 export class MainMenu extends Component {
+
     @property(Node)
-    playUI: Node = null;
+    map: Node;
 
-    @property(GameManager)
-    gameManager: GameManager = null;
+    @property(Node)
+    shopUI: Node = null;
 
-    nextSkin(){
-
-    }
-
-    previousSkin(){
+    nextSkin() {
 
     }
 
-    onButtonStartClick(){
+    previousSkin() {
+
+    }
+
+    onButtonStartClick() {
         this.playSfx(SoundType.Button_Click);
         this.node.active = false;
-        this.playUI.active = true;
-        this.gameManager.init();
+        this.map.active = true;
+        /* this.playUI.active = true;
+        this.gameManager.init(); */
     }
 
-    onButtonOptionClick(){
+    onButtonOptionClick() {
         this.playSfx(SoundType.Button_Click);
     }
 
-    onButtonShopClick(){
+    onButtonShopClick() {
         this.playSfx(SoundType.Button_Click);
+        this.shopUI.active = true;
     }
 
-    playSfx(sound: SoundType){
+    playSfx(sound: SoundType) {
         const audio = AudioSourceControl.instance;
         audio.playSound(sound);
     }
