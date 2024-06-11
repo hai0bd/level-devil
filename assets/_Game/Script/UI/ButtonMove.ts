@@ -1,12 +1,9 @@
-import { _decorator, Button, Component, Input, Node } from 'cc';
+import { _decorator, Button, Component, Input } from 'cc';
 import { GameManager } from '../Manager/GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('ButtonMove')
 export class ButtonMove extends Component {
-    @property(GameManager)
-    gameManager: GameManager;
-
     @property(Button)
     buttonLeft: Button;
 
@@ -33,16 +30,16 @@ export class ButtonMove extends Component {
     }
 
     onClickButtonLeft() {
-        this.gameManager.mapControl.player.playerMoveLeft();
+        GameManager.instance.mapControl.player.playerMoveLeft();
     }
     onClickButtonRight() {
-        this.gameManager.mapControl.player.playerMoveRight();
+        GameManager.instance.mapControl.player.playerMoveRight();
     }
     onClickButtonJump() {
-        this.gameManager.mapControl.player.playerJump();
+        GameManager.instance.mapControl.player.playerJump();
     }
     offClickButton() {
-        this.gameManager.mapControl.player.stopMove();
+        GameManager.instance.mapControl.player.stopMove();
     }
 }
 

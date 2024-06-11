@@ -1,18 +1,11 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, SpriteFrame } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Skin')
-export class Skin extends Component {
+export class Skin {
     @property(String)
     skinID: string = "";
 
-    start() {
-
-    }
-
-    update(deltaTime: number) {
-
-    }
+    @property(SpriteFrame)
+    sprite: SpriteFrame;
 }
-
-

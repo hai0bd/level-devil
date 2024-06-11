@@ -12,10 +12,10 @@ export class Gate extends Component {
     map: Node;
     mapControl: MapControl;
 
-    start(){
+    start() {
         this.instantieMap();
     }
-    
+
     update(deltaTime: number) {
         const player = this.mapControl.player;
         if (player.isWin) {
@@ -38,6 +38,7 @@ export class Gate extends Component {
 
         if (this.levelIndex >= this.mapPrefab.length) {
             alert("To be continue");
+            GameManager.instance.nextGate();
             return;
         }
         this.instantieMap();
@@ -52,9 +53,9 @@ export class Gate extends Component {
     instantieMap() {
         this.map = instantiate(this.mapPrefab[this.levelIndex])
         this.node.addChild(this.map);
+
         this.mapControl = this.map.getComponent(MapControl);
-        // this.map[this.levelIndex].player.audio = this.audio;
-        console.log("next level");
+        GameManager.instance.mapControl = this.mapControl;
     }
 }
 

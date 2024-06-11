@@ -1,86 +1,46 @@
 import { _decorator, Animation, Component, instantiate, Node, Prefab, UITransform } from "cc";
-import { UIManager } from "../UI/UIManager";
 import { MapControl } from "../Node/MapControl";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
 export class GameManager extends Component {
+    private static _instance: GameManager;
     @property(Node)
     canvas: Node | null = null;
 
     @property(Prefab)
-    mapPrefab: Prefab[] = [];
+    gatePrefab: Prefab[] = [];
 
-    @property(Animation)
-    nextLevelUp: Animation | null = null;
-
-    @property(Animation)
-    nextLevelDown: Animation | null = null;
-
-    @property(UIManager)
-    uiCanvas: UIManager;
-
-    map: Node;
+    gate: Node;
     mapControl: MapControl;
-    levelIndex: number = 0;
+
+    currentIndex: number = 0;
+
+    public static get instance(): GameManager {
+        if (!this._instance) {
+            this._instance = new GameManager;
+        }
+        return this._instance;
+    }
+
+    onLoad() {
+        if (!GameManager._instance) {
+            GameManager._instance = this;
+        } else {
+            this.destroy();
+        }
+    }
+
+    nextGate() {
+        this.gate.destroy();
+        this.instantieGate(++this.currentIndex);
+    }
 
     instantieGate(index: number) {
-        this.map = instantiate(this.mapPrefab[index])
-        this.canvas.addChild(this.map);
-        // this.mapControl = this.map.getComponent(MapControl);
-        // this.map[this.levelIndex].player.audio = this.audio;
-        // console.log("next level");
+        this.currentIndex = index;
+        this.gate = instantiate(this.gatePrefab[index])
+        this.canvas.addChild(this.gate);
     }
-
-    update() {
-
-    }
-
-    /* update(deltaTime: number) {
-        const player = this.mapControl.player;
-        if (player.isWin) {
-            player.playerAnim.node.active = false;
-            this.mapControl.gateAnim.enabled = true;
-
-            this.nextLevelUp.play('next-level-up');
-            this.nextLevelDown.play('next-level-down');
-
-            this.scheduleOnce(this.nextLevel, 0.67);
-        }
-        else if (player.isLose) {
-            player.node.active = false;
-            this.mapControl.playerDeathAnim.enabled = true;
-            this.scheduleOnce(this.playAgain, 1);
-        }
-    }
-
-    nextLevel() {
-        // this.map.active = false;
-        this.map.destroy();
-        this.levelIndex++;
-
-        if (this.levelIndex >= this.mapPrefab.length) {
-            alert("To be continue");
-            return;
-        }
-        this.instantieMap();
-    }
-
-    playAgain() {
-        // this.map.active = false;
-        this.map.destroy();
-        this.instantieMap();
-    }
-
-    instantieMap() {
-        this.map = instantiate(this.mapPrefab[this.levelIndex])
-        this.canvas.addChild(this.map);
-        this.mapControl = this.map.getComponent(MapControl);
-        // this.map[this.levelIndex].player.audio = this.audio;
-        console.log("next level");
-    } */
-
-
 }
 export enum CollisionTag {
     TrapPoint = 1,

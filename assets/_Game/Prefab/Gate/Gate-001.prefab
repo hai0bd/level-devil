@@ -1186,8 +1186,28 @@
     "__prefab": {
       "__id__": 57
     },
-    "playUI": null,
-    "gameManager": null,
+    "mapPrefab": [
+      {
+        "__uuid__": "7d2ca899-0365-4f97-a833-e1ada8f6bc03",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "d0935c26-2d7b-4024-a53f-ade4fc67a394",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "bb77e8f5-d000-46ae-a72c-3b13eec81cc8",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "08c95670-dd40-4c7e-b373-a4bd2335cffd",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "d7af39b0-256a-4af3-a651-6217ab8e55e9",
+        "__expectedType__": "cc.Prefab"
+      }
+    ],
     "_id": ""
   },
   {
@@ -1203,6 +1223,7 @@
       "__id__": 0
     },
     "fileId": "9dziZcsIxInIhYEXFOs7vz",
+    "instance": null,
     "targetOverrides": null
   }
 ]

@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { GameManager } from '../Manager/GameManager';
 import { AudioSourceControl, SoundType } from '../Manager/AudioSourceControl';
+import { BouncePopUp } from './BouncePopUp';
 const { ccclass, property } = _decorator;
 
 @ccclass('MainMenu')
@@ -9,8 +10,8 @@ export class MainMenu extends Component {
     @property(Node)
     map: Node;
 
-    @property(Node)
-    shopUI: Node = null;
+    @property(BouncePopUp)
+    shopUI: BouncePopUp = null;
 
     nextSkin() {
 
@@ -34,7 +35,8 @@ export class MainMenu extends Component {
 
     onButtonShopClick() {
         this.playSfx(SoundType.Button_Click);
-        this.shopUI.active = true;
+        this.shopUI.node.active = true;
+        this.shopUI.init();
     }
 
     playSfx(sound: SoundType) {

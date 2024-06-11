@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, sys } from 'cc';
+import { _decorator, Component, Game, Node, sys } from 'cc';
 import { Skin } from '../Node/Skin';
 const { ccclass, property } = _decorator;
 
@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class DataManager extends Component {
     private static _instance: DataManager;
 
-    keyPlayerData: string = "playerData";
+    keyPlayerData: string = "PlayerData";
     playerData: PlayerData;
 
     public static get instance(): DataManager {
@@ -25,6 +25,10 @@ export class DataManager extends Component {
     }
 
     start() {
+        this.loadPlayerData();
+    }
+
+    loadPlayerData() {
         let data = sys.localStorage.getItem(this.keyPlayerData);
         if (data) {
             this.playerData = JSON.parse(data);
@@ -32,8 +36,9 @@ export class DataManager extends Component {
         else this.playerData = new PlayerData();
     }
 
-    addSkin(skin: Skin) {
-        this.playerData.skin.push(skin);
+    addSkin(skinID: number) {
+        const playerSkin = this.playerData.skin;
+        // playerSkin.push(skin);
     }
 
     deathTimesPlus() {
