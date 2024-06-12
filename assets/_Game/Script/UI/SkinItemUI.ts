@@ -11,6 +11,12 @@ export class SkinItemUI extends Component {
     @property(Sprite)
     spritePrice: Sprite;
 
+    @property(SpriteFrame)
+    ownedSprite: SpriteFrame;
+
+    @property(Label)
+    labelPrice: Label;
+
     @property(Button)
     itemButton: Button;
 
@@ -24,10 +30,12 @@ export class SkinItemUI extends Component {
     }
     checkSkin() {
         if (DataManager.instance.playerData.skinID.indexOf(this.skinItem.skinID) == -1) {
+            // this.labelPrice.string = this.skinItem.price.toString();
             this.itemButton.node.on(Button.EventType.CLICK, this.onButtonBuy, this);
         }
         else {
-            this.spritePrice.spriteFrame = null;
+            this.spritePrice.spriteFrame = this.ownedSprite;
+            this.labelPrice.string = "Owned";
             this.itemButton.node.off(Button.EventType.CLICK, this.onButtonBuy, this);
         }
     }
