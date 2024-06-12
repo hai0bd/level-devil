@@ -516,7 +516,9 @@
     "_disabledSprite": null,
     "_duration": 0.1,
     "_zoomScale": 1.2,
-    "_target": null,
+    "_target": {
+      "__id__": 14
+    },
     "_id": ""
   },
   {
@@ -578,6 +580,9 @@
     },
     "spriteItems": {
       "__id__": 11
+    },
+    "spritePrice": {
+      "__id__": 17
     },
     "itemButton": {
       "__id__": 19

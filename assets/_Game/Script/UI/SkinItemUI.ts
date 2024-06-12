@@ -1,4 +1,4 @@
-import { _decorator, Button, Component, EventHandle, EventHandler, Label, Node, Sprite, SpriteFrame } from 'cc';
+import { _decorator, Button, Component, EventHandle, EventHandler, Label, log, Node, Sprite, SpriteFrame } from 'cc';
 import { DataManager } from '../Manager/DataManager';
 import { Skin } from '../Node/Skin';
 const { ccclass, property } = _decorator;
@@ -8,27 +8,37 @@ export class SkinItemUI extends Component {
     @property(Sprite)
     spriteItems: Sprite;
 
+    @property(Sprite)
+    spritePrice: Sprite;
+
     @property(Button)
     itemButton: Button;
 
+    logPay: string;
+    skinItem: Skin;
+
     init(item: Skin) {
+        this.skinItem = item;
         this.spriteItems.spriteFrame = item.sprite;
-        this.setEvenClickButton(item.skinID);
-        
+        this.checkSkin();
     }
-    setEvenClickButton(itemID: string) {
-        let clickEventHandler = new EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "SkinItemUI";
-        clickEventHandler.handler = "onButtonBuy";
-        clickEventHandler.customEventData = itemID;
-        this.itemButton.clickEvents.push(clickEventHandler);
+    checkSkin() {
+        if (DataManager.instance.playerData.skinID.indexOf(this.skinItem.skinID) == -1) {
+            this.itemButton.node.on(Button.EventType.CLICK, this.onButtonBuy, this);
+        }
+        else {
+            this.spritePrice.spriteFrame = null;
+            this.itemButton.node.off(Button.EventType.CLICK, this.onButtonBuy, this);
+        }
     }
 
-    onButtonBuy(deltaTime: number, customEventData: string) {
-        console.log("Da mua thanh cong");
+    onButtonBuy() {
         alert("Đã mua thành công");
-        DataManager.instance.addSkin(parseInt(customEventData));
+        DataManager.instance.addSkin(this.skinItem.skinID);
+        /* for (let i = 0; i < DataManager.instance.playerData.skinID.length; i++) {
+            console.log(DataManager.instance.playerData.skinID[i] + ' ');
+        } */
+        this.checkSkin();
     }
 }
 

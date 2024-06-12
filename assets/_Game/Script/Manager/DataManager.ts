@@ -36,9 +36,14 @@ export class DataManager extends Component {
         else this.playerData = new PlayerData();
     }
 
-    addSkin(skinID: number) {
-        const playerSkin = this.playerData.skin;
-        // playerSkin.push(skin);
+    addSkin(skinID: string) {
+        if (this.playerData.skinID.indexOf(skinID) == -1) {
+            this.playerData.skinID.push(skinID);
+        }
+
+        /* for(let i = 0; i < this.playerData.skinID.length; i++){
+            console.log(this.playerData.skinID[i] + ' ');
+        } */
     }
 
     deathTimesPlus() {
@@ -58,11 +63,11 @@ export class DataManager extends Component {
 export class PlayerData {
     deathTimes: number;
     gate: number;
-    skin: Skin[];
+    skinID: string[] = [];
 
     PlayerData() {
         this.deathTimes = 10;
-        this.skin = null;
-        this.gate = null;
+        this.gate = 0;
+        this.skinID = null;
     }
 }
