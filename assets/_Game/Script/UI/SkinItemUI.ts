@@ -35,6 +35,7 @@ export class SkinItemUI extends Component {
     onButtonBuy() {
         alert("Đã mua thành công");
         DataManager.instance.addSkin(this.skinItem.skinID);
+        DataManager.instance.testDataMN();
         /* for (let i = 0; i < DataManager.instance.playerData.skinID.length; i++) {
             console.log(DataManager.instance.playerData.skinID[i] + ' ');
         } */

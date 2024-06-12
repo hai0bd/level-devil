@@ -1,5 +1,6 @@
-import { _decorator, Animation, Component, instantiate, Node, Prefab, UITransform } from "cc";
+import { _decorator, Animation, Camera, Component, instantiate, Node, Prefab, UITransform } from "cc";
 import { MapControl } from "../Node/MapControl";
+import { ScreenShake } from "../ScreenShake";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -7,6 +8,9 @@ export class GameManager extends Component {
     private static _instance: GameManager;
     @property(Node)
     canvas: Node | null = null;
+
+    @property(ScreenShake)
+    mainCamera: ScreenShake = null;
 
     @property(Prefab)
     gatePrefab: Prefab[] = [];
@@ -29,6 +33,10 @@ export class GameManager extends Component {
         } else {
             this.destroy();
         }
+    }
+
+    screenShake() {
+        this.mainCamera.init();
     }
 
     nextGate() {

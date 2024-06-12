@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab } from 'cc';
+import { _decorator, Component, Game, instantiate, Node, Prefab } from 'cc';
 import { GameManager } from '../Manager/GameManager';
 import { MapControl } from './MapControl';
 const { ccclass, property } = _decorator;
@@ -25,6 +25,7 @@ export class Gate extends Component {
             this.scheduleOnce(this.nextLevel, 0.67);
         }
         else if (player.isLose) {
+            GameManager.instance.screenShake();
             player.node.active = false;
             this.mapControl.playerDeathAnim.enabled = true;
             this.scheduleOnce(this.playAgain, 1);

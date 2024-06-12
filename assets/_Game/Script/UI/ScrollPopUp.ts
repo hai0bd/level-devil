@@ -1,9 +1,9 @@
-import { _decorator, CCFloat, Component, Node, Tween, tween, Vec3 } from 'cc';
+import { _decorator, CCFloat, Component, Node, tween, Vec3 } from 'cc';
 import { AudioSourceControl, SoundType } from '../Manager/AudioSourceControl';
 const { ccclass, property } = _decorator;
 
-@ccclass('BouncePopUp')
-export class BouncePopUp extends Component {
+@ccclass('ScrollPopUp')
+export class ScrollPopUp extends Component {
     @property(CCFloat)
     durationTime: number = 1;
 
@@ -11,7 +11,7 @@ export class BouncePopUp extends Component {
 
     init() {
         // Thiết lập trạng thái ban đầu cho node (kích thước nhỏ)
-        this.node.setScale(new Vec3(0, 0, 0));
+        this.node.setScale(new Vec3(0, 1, 0));
 
         // Sử dụng tween để phóng to node với hiệu ứng nảy ra từ giữa
         if (!this.isOpen) this.openPopUp()
@@ -31,7 +31,7 @@ export class BouncePopUp extends Component {
     exitPopUp() {
         this.isOpen = false;
         tween(this.node)
-            .to(this.durationTime, { scale: new Vec3(0, 0, 0) }, { easing: 'backIn' })
+            .to(this.durationTime, { scale: new Vec3(0, 1, 0) }, { easing: 'backIn' })
             .call(() => { this.node.active = false })
             .start();
     }
@@ -41,3 +41,5 @@ export class BouncePopUp extends Component {
         audio.playSound(Button_Click);
     }
 }
+
+

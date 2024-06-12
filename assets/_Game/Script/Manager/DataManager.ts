@@ -24,6 +24,10 @@ export class DataManager extends Component {
         }
     }
 
+    testDataMN() {
+        console.log("Test thanh cong");
+    }
+
     start() {
         this.loadPlayerData();
     }
@@ -40,10 +44,6 @@ export class DataManager extends Component {
         if (this.playerData.skinID.indexOf(skinID) == -1) {
             this.playerData.skinID.push(skinID);
         }
-
-        /* for(let i = 0; i < this.playerData.skinID.length; i++){
-            console.log(this.playerData.skinID[i] + ' ');
-        } */
     }
 
     deathTimesPlus() {
@@ -68,6 +68,6 @@ export class PlayerData {
     PlayerData() {
         this.deathTimes = 10;
         this.gate = 0;
-        this.skinID = null;
+        this.skinID = ["0"];
     }
 }
