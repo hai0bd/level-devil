@@ -1,25 +1,21 @@
 import { _decorator, Component, instantiate, Node, Prefab } from 'cc';
 import { Skin } from '../Node/Skin';
 import { SkinItemUI } from './SkinItemUI';
+import { DataManager } from '../Manager/DataManager';
+import { GameManager } from '../Manager/GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('SpawnItemSkin')
 export class SpawnItemSkin extends Component {
-    @property(Skin)
-    defautSkin: Skin = null;
-
-    @property(Skin)
-    listSkin: Skin[] = [];
-
     @property(Prefab)
     itemPrefab: Prefab = null;
 
     item: Node;
+    listSkin: Skin[];
     skinItemsUI: SkinItemUI;
 
     start() {
-        console.log("Da mo shop va spawn item");
-        this.spawnItems(this.defautSkin);
+        this.listSkin = DataManager.instance.listGameSkin;
         for (let i = 0; i < this.listSkin.length; i++) {
             this.spawnItems(this.listSkin[i]);
         }

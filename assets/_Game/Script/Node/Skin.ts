@@ -1,14 +1,14 @@
-import { _decorator, CCFloat, SpriteFrame } from 'cc';
+import { _decorator, CCFloat, CCString, SpriteFrame } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Skin')
 export class Skin {
-    @property(String)
+    @property(CCString)
     skinID: string = "";
 
     @property(SpriteFrame)
     sprite: SpriteFrame;
 
     @property(CCFloat)
-    price: number;
+    price: number = 0.99;
 }

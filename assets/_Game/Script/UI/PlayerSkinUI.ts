@@ -1,40 +1,30 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
-import { SpawnItemSkin } from './SpawnItemSkin';
 import { Skin } from '../Node/Skin';
 import { DataManager } from '../Manager/DataManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerSkinUI')
 export class PlayerSkinUI extends Component {
-    @property(SpawnItemSkin)
-    skinSpawm: SpawnItemSkin = null;
-
     @property(Sprite)
     skinSprite: Sprite;
 
     skinIndex: number = 0;
-    playerSkinData: Skin[];
+    listGameSkin: Skin[];
+    playerSkinData: string[];
+
+    currentSkin: Skin;
+
+    testDtMN: number;
 
     start() {
-        const listSkin = this.skinSpawm.listSkin;
-        console.log(listSkin.length);
-        console.log(DataManager.instance.testDataMN());
-        for (let i = 0; i < listSkin.length; i++) {
-            this.checkID(listSkin[i]);
-        }
-        // console.log(this.playerSkinData.length);
-        /* this.spawnCurrentSkin(this.skinIndex);
-        for (let i = 0; i < this.playerSkinData.length; i++) {
-            console.log(this.playerSkinData[i].skinID + ' ');
-        } */
+        this.listGameSkin = DataManager.instance.listGameSkin;
+        this.playerSkinData = DataManager.instance.playerData.skinID;
+
+        this.spawnCurrentSkin(this.skinIndex);
     }
 
-    checkID(skin: Skin) {
-        // console.log(skin.skinID);
-        // console.log(DataManager.instance.playerData.deathTimes);
-        /* if (data.playerData.skinID.indexOf(skin.skinID) != -1) {
-            this.playerSkinData.push(skin);
-        } */
+    protected update(dt: number): void {
+        console.log(this.playerSkinData.length);
     }
 
     nextSkin() {
@@ -49,6 +39,13 @@ export class PlayerSkinUI extends Component {
 
     spawnCurrentSkin(index: number) {
         if (index >= this.playerSkinData.length || index < 0) return;
-        this.skinSprite.spriteFrame = this.playerSkinData[index].sprite;
+        this.currentSkin = this.findSkin(this.playerSkinData[index]);
+        this.skinSprite.spriteFrame = this.currentSkin.sprite;
+    }
+    findSkin(id: string): Skin {
+        for (let i = 0; i < this.listGameSkin.length; i++) {
+            if (this.listGameSkin[i].skinID == id) return this.listGameSkin[i];
+        }
+        return null;
     }
 }

@@ -6,6 +6,9 @@ const { ccclass, property } = _decorator;
 export class DataManager extends Component {
     private static _instance: DataManager;
 
+    @property(Skin)
+    listGameSkin: Skin[] = [];
+
     keyPlayerData: string = "PlayerData";
     playerData: PlayerData;
 
@@ -24,12 +27,9 @@ export class DataManager extends Component {
         }
     }
 
-    testDataMN() {
-        console.log("Test thanh cong");
-    }
-
     start() {
         this.loadPlayerData();
+        this.showPlayerData();
     }
 
     loadPlayerData() {
@@ -38,6 +38,19 @@ export class DataManager extends Component {
             this.playerData = JSON.parse(data);
         }
         else this.playerData = new PlayerData();
+    }
+
+    showPlayerData() {
+        for (let i = 0; i < this.playerData.skinID.length; i++) {
+            console.log(this.playerData.skinID);
+        }
+    }
+
+    findSkin(id: string): Skin {
+        for (let i = 0; i < this.listGameSkin.length; i++) {
+            if (this.listGameSkin[i].skinID == id) return this.listGameSkin[i];
+        }
+        return null;
     }
 
     addSkin(skinID: string) {
@@ -65,7 +78,7 @@ export class PlayerData {
     gate: number;
     skinID: string[] = [];
 
-    PlayerData() {
+    constructor() {
         this.deathTimes = 10;
         this.gate = 0;
         this.skinID = ["0"];
