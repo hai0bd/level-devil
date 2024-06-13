@@ -27,14 +27,6 @@ export class MainMenu extends Component {
         this.startButton.node.on(Input.EventType.TOUCH_START, this.onButtonStartClick, this);
     } */
 
-    nextSkin() {
-
-    }
-
-    previousSkin() {
-
-    }
-
     onButtonStartClick() {
         this.playSfx(SoundType.Button_Click);
         this.node.active = false;

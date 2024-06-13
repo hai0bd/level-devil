@@ -23,22 +23,19 @@ export class PlayerSkinUI extends Component {
         this.spawnCurrentSkin(this.skinIndex);
     }
 
-    protected update(dt: number): void {
-        console.log(this.playerSkinData.length);
-    }
-
     nextSkin() {
+        if (this.skinIndex + 1 >= this.playerSkinData.length) return;
         this.skinIndex++;
         this.spawnCurrentSkin(this.skinIndex);
     }
 
     previousSkin() {
+        if (this.skinIndex - 1 >= this.playerSkinData.length || this.skinIndex - 1 < 0) return;
         this.skinIndex--;
         this.spawnCurrentSkin(this.skinIndex);
     }
 
     spawnCurrentSkin(index: number) {
-        if (index >= this.playerSkinData.length || index < 0) return;
         this.currentSkin = this.findSkin(this.playerSkinData[index]);
         this.skinSprite.spriteFrame = this.currentSkin.sprite;
     }

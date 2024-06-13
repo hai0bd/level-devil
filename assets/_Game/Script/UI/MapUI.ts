@@ -9,23 +9,23 @@ export class MapUI extends Component {
     @property(Node)
     playUI: Node = null;
 
-    @property(GameManager)
-    gameManager: GameManager = null;
+    @property(Node)
+    mainMenu: Node;
 
     @property(ScrollPopUp)
     popup: ScrollPopUp;
 
     isOpen = false;
-    
-    playSfx(Button_Click: SoundType) {
-        const audio = AudioSourceControl.instance;
-        audio.playSound(Button_Click);
+
+    onClickBack() {
+        this.popup.onClickEsc();
+        this.mainMenu.active = true;
     }
 
     onClickGate(deltaTime: number, customEvenData: string) {
         this.playUI.active = true;
         this.popup.onClickEsc();
-        this.gameManager.instantieGate(parseInt(customEvenData));
+        GameManager.instance.instantieGate(parseInt(customEvenData));
         // this.node.active = false;
     }
 }

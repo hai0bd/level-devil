@@ -19,7 +19,7 @@ export class Gate extends Component {
     }
 
     update(deltaTime: number) {
-        if(this.isHandling) return;
+        if (this.isHandling) return;
 
         const player = this.mapControl.player;
         if (player.isWin) {
@@ -34,6 +34,7 @@ export class Gate extends Component {
             GameManager.instance.screenShake();
             player.node.active = false;
             this.mapControl.playerDeathAnim.enabled = true;
+            this.scheduleOnce(this.playAgain, 1);
         }
     }
 
@@ -53,7 +54,7 @@ export class Gate extends Component {
 
     playAgain() {
         this.isHandling = false;
-        // this.map.active = false;
+        this.map.active = false;
         this.map.destroy();
         this.instantieMap();
     }
