@@ -1,6 +1,7 @@
 import { _decorator, Animation, Camera, Component, instantiate, Node, Prefab, UITransform } from "cc";
 import { MapControl } from "../Node/MapControl";
 import { ScreenShake } from "../ScreenShake";
+import { Gate } from "../Node/Gate";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -16,7 +17,7 @@ export class GameManager extends Component {
     gatePrefab: Prefab[] = [];
 
     gate: Node;
-    mapControl: MapControl;
+    gateControl: Gate;
 
     currentIndex: number = 0;
 
@@ -36,7 +37,7 @@ export class GameManager extends Component {
     }
 
     screenShake() {
-        this.mainCamera.init();
+        this.mainCamera.init(); 
     }
 
     nextGate() {

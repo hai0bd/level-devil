@@ -16,6 +16,9 @@ export class AudioSourceControl extends Component {
     @property({ type: AudioClip })
     winSfx: AudioClip = null;
 
+    @property({ type: AudioClip })
+    openMap: AudioClip;
+
     @property(AudioClip)
     trapMoverment: AudioClip = null;
 
@@ -53,6 +56,9 @@ export class AudioSourceControl extends Component {
                 case SoundType.E_Sound_Win:
                     clipToPlay = this.winSfx;
                     break;
+                case SoundType.Open_Map:
+                    clipToPlay = this.openMap;
+                    break;
                 case SoundType.Trap_Move:
                     clipToPlay = this.trapMoverment;
                     break;
@@ -72,5 +78,6 @@ export enum SoundType {
     E_Sound_Die = 2,
     E_Sound_Win = 3,
     Trap_Move = 4,
-    Button_Click = 5
+    Button_Click = 5,
+    Open_Map = 6
 }

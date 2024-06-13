@@ -1,5 +1,5 @@
 import { _decorator, Animation, CCFloat, CCInteger, Collider2D, Component, Contact2DType, EventKeyboard, Input, input, IPhysics2DContact, KeyCode, Node, RigidBody2D, Vec2, Vec3 } from 'cc';
-import { CollisionTag } from './Manager/GameManager';
+import { CollisionTag, GameManager } from './Manager/GameManager';
 import { AudioSourceControl, SoundType } from './Manager/AudioSourceControl';
 const { ccclass, property } = _decorator;
 
@@ -129,6 +129,7 @@ export class PlayerController extends Component {
         }
         else if (otherCollider.tag == CollisionTag.DeathPoint) {
             this.isLose = true;
+            // GameManager.instance.screenShake();
             this.PlaySoundEffect(SoundType.E_Sound_Die);
         }
     }

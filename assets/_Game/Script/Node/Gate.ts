@@ -9,31 +9,37 @@ export class Gate extends Component {
     mapPrefab: Prefab[] = [];
 
     levelIndex: number = 0;
+    isHandling: boolean = false;
     map: Node;
     mapControl: MapControl;
 
     start() {
+        GameManager.instance.gateControl = this;
         this.instantieMap();
     }
 
     update(deltaTime: number) {
+        if(this.isHandling) return;
+
         const player = this.mapControl.player;
         if (player.isWin) {
+            this.isHandling = true;
             player.playerAnim.node.active = false;
             this.mapControl.gateAnim.enabled = true;
 
             this.scheduleOnce(this.nextLevel, 0.67);
         }
         else if (player.isLose) {
+            this.isHandling = true;
             GameManager.instance.screenShake();
             player.node.active = false;
             this.mapControl.playerDeathAnim.enabled = true;
-            this.scheduleOnce(this.playAgain, 1);
         }
     }
 
     nextLevel() {
         // this.map.active = false;
+        this.isHandling = false;
         this.map.destroy();
         this.levelIndex++;
 
@@ -46,6 +52,7 @@ export class Gate extends Component {
     }
 
     playAgain() {
+        this.isHandling = false;
         // this.map.active = false;
         this.map.destroy();
         this.instantieMap();
@@ -56,7 +63,6 @@ export class Gate extends Component {
         this.node.addChild(this.map);
 
         this.mapControl = this.map.getComponent(MapControl);
-        GameManager.instance.mapControl = this.mapControl;
     }
 }
 

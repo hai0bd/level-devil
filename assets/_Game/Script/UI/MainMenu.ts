@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Scene } from 'cc';
+import { _decorator, Component, Game, Node, Scene } from 'cc';
 import { GameManager } from '../Manager/GameManager';
 import { AudioSourceControl, SoundType } from '../Manager/AudioSourceControl';
 import { BouncePopUp } from './BouncePopUp';
@@ -37,7 +37,8 @@ export class MainMenu extends Component {
 
     onButtonOptionClick() {
         this.playSfx(SoundType.Button_Click);
-        this.screenShake.init();
+        if(GameManager.instance == null) console.log("GameMN null");
+        GameManager.instance.screenShake();
     }
 
     onButtonShopClick() {

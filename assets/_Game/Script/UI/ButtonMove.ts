@@ -30,16 +30,16 @@ export class ButtonMove extends Component {
     }
 
     onClickButtonLeft() {
-        GameManager.instance.mapControl.player.playerMoveLeft();
+        GameManager.instance.gateControl.mapControl.player.playerMoveLeft();
     }
     onClickButtonRight() {
-        GameManager.instance.mapControl.player.playerMoveRight();
+        GameManager.instance.gateControl.mapControl.player.playerMoveRight();
     }
     onClickButtonJump() {
-        GameManager.instance.mapControl.player.playerJump();
+        GameManager.instance.gateControl.mapControl.player.playerJump();
     }
     offClickButton() {
-        GameManager.instance.mapControl.player.stopMove();
+        GameManager.instance.gateControl.mapControl.player.stopMove();
     }
 }
 

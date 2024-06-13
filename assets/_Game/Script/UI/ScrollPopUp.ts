@@ -10,6 +10,7 @@ export class ScrollPopUp extends Component {
     isOpen: boolean = false;
 
     init() {
+        this.playSfx(SoundType.Open_Map);
         // Thiết lập trạng thái ban đầu cho node (kích thước nhỏ)
         this.node.setScale(new Vec3(0, 1, 0));
 
@@ -25,7 +26,7 @@ export class ScrollPopUp extends Component {
     }
 
     onClickEsc() {
-        this.playSfx(SoundType.Button_Click);
+        this.playSfx(SoundType.Open_Map);
         this.exitPopUp();
     }
     exitPopUp() {
@@ -36,9 +37,9 @@ export class ScrollPopUp extends Component {
             .start();
     }
 
-    playSfx(Button_Click: SoundType) {
+    playSfx(sound: SoundType) {
         const audio = AudioSourceControl.instance;
-        audio.playSound(Button_Click);
+        audio.playSound(sound);
     }
 }
 

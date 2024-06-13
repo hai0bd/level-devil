@@ -15,7 +15,7 @@ export class GamePlayUI extends Component {
     }
 
     onButtonReplay() {
-        this.gameManager.playAgain();
+        this.gameManager.gateControl.playAgain();
     }
 
     onButtonSetting() {
