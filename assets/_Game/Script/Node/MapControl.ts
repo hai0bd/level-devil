@@ -1,6 +1,7 @@
 import { _decorator, Animation, Component, RigidBody2D } from 'cc';
 import { DeathAnim } from '../DeathAnim';
 import { PlayerController } from '../PlayerController';
+import { AudioSourceControl, SoundType } from '../Manager/AudioSourceControl';
 const { ccclass, property } = _decorator;
 
 @ccclass("MapControl")
@@ -17,13 +18,21 @@ export class MapControl extends Component {
     @property(PlayerController)
     player: PlayerController;
 
-    /* update(deltaTime: number) {
-        if(this.player.isTrapped > 0){
-            console.log("isTrapped");
-            this.moveTrap(this.player.isTrapped);
-        }
+    /* start(){
+        this.playSfx(SoundType.Background_Music);
     }
-    moveTrap(index: number){
-        this.groundTrap[index].enabled = true;
+    
+    protected onDestroy(): void {
+        this.offSfx(SoundType.Background_Music);
+    }
+
+    playSfx(sound: SoundType){
+        const audio = AudioSourceControl.instance;
+        audio.playSound(sound)
+    }
+
+    offSfx(sound: SoundType){
+        const audio = AudioSourceControl.instance;
+        audio.stopSound(sound);
     } */
 }

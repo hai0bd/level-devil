@@ -4800,7 +4800,7 @@
     ],
     "timeSpeed": 0.2,
     "delayTime": 0,
-    "_id": "27qG1XdKZOR5P6MOuEytJE"
+    "_id": "a7PvdlF0xGSJZj4/L4hjVg"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -13895,7 +13895,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 1000.4571812142592,
+      "x": 93.41368121425921,
       "y": 1146.5445,
       "z": 0
     },
@@ -13936,7 +13936,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 3929.088362428518,
+      "width": 5743.175362,
       "height": 1221.979
     },
     "_anchorPoint": {

@@ -28,6 +28,9 @@ export class AudioSourceControl extends Component {
     @property(AudioSource)
     soundEffectSource: AudioSource | null = null;
 
+    @property(AudioSource)
+    backgroundMusic: AudioSource = null;
+
     public static get instance(): AudioSourceControl {
         if (!this._instance) {
             this._instance = new AudioSourceControl;
@@ -72,12 +75,17 @@ export class AudioSourceControl extends Component {
             }
         }
     }
+    
+    playSoundTrack(isOn: boolean){
+        isOn ? this.backgroundMusic.play() : this.backgroundMusic.stop();
+    }
 }
 export enum SoundType {
     E_Sound_Jump = 1,
     E_Sound_Die = 2,
     E_Sound_Win = 3,
-    Trap_Move = 4,
-    Button_Click = 5,
-    Open_Map = 6
+    Background_Music = 4,
+    Trap_Move = 5,
+    Button_Click = 6,
+    Open_Map = 7
 }

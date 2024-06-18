@@ -1,31 +1,17 @@
-import { _decorator, Button, Component, Game, Input, Node, Scene } from 'cc';
+import { _decorator, Component } from 'cc';
 import { GameManager } from '../Manager/GameManager';
 import { AudioSourceControl, SoundType } from '../Manager/AudioSourceControl';
 import { BouncePopUp } from './BouncePopUp';
 import { ScrollPopUp } from './ScrollPopUp';
-import { ScreenShake } from '../ScreenShake';
 const { ccclass, property } = _decorator;
 
 @ccclass('MainMenu')
 export class MainMenu extends Component {
-    @property(Button)
-    startButton: Button;
-
-    @property(Button)
-    optionButton: Button;
-
-    @property(Button)
-    shopButton: Button;
-
     @property(ScrollPopUp)
     map: ScrollPopUp;
 
     @property(BouncePopUp)
     shopUI: BouncePopUp = null;
-/* 
-    start() {
-        this.startButton.node.on(Input.EventType.TOUCH_START, this.onButtonStartClick, this);
-    } */
 
     onButtonStartClick() {
         this.playSfx(SoundType.Button_Click);

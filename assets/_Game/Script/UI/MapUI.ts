@@ -15,7 +15,21 @@ export class MapUI extends Component {
     @property(ScrollPopUp)
     popup: ScrollPopUp;
 
+    @property(Node)
+    gates: Node[] = [];
+
+    currentGateIndex: number = 0;
     isOpen = false;
+
+    start(){
+        this.showGatePos(0);
+    }
+
+    showGatePos(index: number){
+        this.gates[this.currentGateIndex].active = false;
+        this.gates[index].active = true;
+        this.currentGateIndex = index;
+    }
 
     onClickBack() {
         this.popup.onClickEsc();

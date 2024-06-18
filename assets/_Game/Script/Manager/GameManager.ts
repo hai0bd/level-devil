@@ -2,6 +2,9 @@ import { _decorator, Animation, Camera, Component, instantiate, Node, Prefab, UI
 import { MapControl } from "../Node/MapControl";
 import { ScreenShake } from "../ScreenShake";
 import { Gate } from "../Node/Gate";
+import { AudioSourceControl } from "./AudioSourceControl";
+import { MapUI } from "../UI/MapUI";
+import { UIManager } from "../UI/UIManager";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -13,13 +16,16 @@ export class GameManager extends Component {
     @property(ScreenShake)
     mainCamera: ScreenShake = null;
 
+    @property(MapUI)
+    map: MapUI;
+
     @property(Prefab)
     gatePrefab: Prefab[] = [];
 
     gate: Node;
     gateControl: Gate;
 
-    currentIndex: number = 0;
+    currentGateIndex: number = 0;
 
     public static get instance(): GameManager {
         if (!this._instance) {
@@ -37,16 +43,18 @@ export class GameManager extends Component {
     }
 
     screenShake() {
-        this.mainCamera.init(); 
+        this.mainCamera.init();
     }
 
     nextGate() {
         this.gate.destroy();
-        this.instantieGate(++this.currentIndex);
+        UIManager.instance.gamePlayUI.onClickEsc();
+        this.map.showGatePos(++this.currentGateIndex);
+        // this.instantieGate(++this.currentGateIndex);
     }
 
     instantieGate(index: number) {
-        this.currentIndex = index;
+        this.currentGateIndex = index;
         this.gate = instantiate(this.gatePrefab[index])
         this.canvas.addChild(this.gate);
     }

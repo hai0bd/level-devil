@@ -1,6 +1,5 @@
 import { _decorator, Component, game, Game, Node } from 'cc';
 import { GameManager } from '../Manager/GameManager';
-import { MapUI } from './MapUI';
 import { ScrollPopUp } from './ScrollPopUp';
 const { ccclass, property } = _decorator;
 
