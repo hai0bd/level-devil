@@ -1,4 +1,4 @@
-import {_decorator, Component, game, sys} from 'cc';
+import {_decorator, Component, director, game, instantiate, Prefab, resources, sys} from 'cc';
 import {GateNativeBridge} from "db://assets/_Game/Script/NativeBridge";
 
 const {ccclass, property} = _decorator;
@@ -34,6 +34,21 @@ export class ShopUI extends Component {
             }
         }
     }
+    
+    dialogNotify(message) {
+        resources.load("PopUp/Dialog", (err, asset) => {
+            var nodeLoading = instantiate(asset as Prefab);
+            director.getScene().getChildByName("Canvas").addChild(nodeLoading);
+
+            // const st = director
+            //     .getScene()
+            //     .getChildByName("Canvas")
+            //     .getChildByName("Dialog").getComponent(Dialog);
+            //
+            // st.setContent(message);
+        });
+
+    }
 
     handlePurchaseSuccess(productId) {
         console.log('handlePurchaseSuccess ', productId)
@@ -48,7 +63,7 @@ export class ShopUI extends Component {
 
     onTouchItem() {
         //  goi khi bam mua item
-        
+
         const productId = 'com.chienbinh.0.99'
         if (sys.isNative) {
             GateNativeBridge.purchaseProduct(productId);
