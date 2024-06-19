@@ -1,10 +1,24 @@
-import {_decorator, Component, director, game, instantiate, Prefab, resources, sys} from 'cc';
-import {GateNativeBridge} from "db://assets/_Game/Script/NativeBridge";
+import { _decorator, Button, Component, director, game, instantiate, Label, Node, Prefab, resources, Sprite, SpriteFrame, sys } from 'cc';
+import { GateNativeBridge } from "db://assets/_Game/Script/NativeBridge";
+import { BouncePopUp } from './BouncePopUp';
 
-const {ccclass, property} = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('ShopUI')
 export class ShopUI extends Component {
+    @property(BouncePopUp)
+    dialog: BouncePopUp;
+
+    @property(Label)
+    labelDialog: Label;
+
+    @property(Button)
+    buttonDialog: Button;
+
+    start() {
+        this.dialogNotify("Test hien popup");
+    }
+
     onLoad() {
         game.on("ON_NATIVE_MESSAGE", this.handleIap, this);
     }
@@ -25,29 +39,61 @@ export class ShopUI extends Component {
             } else if (value?.state === "cancel") {
                 //     thanh toan thanh cong
 
-                // this.dialogNotify("Cancel, purchase unsuccessfully!");
+                this.dialogNotify("Cancel, purchase unsuccessfully!");
                 //     update to server
             } else if (value?.state === "error") {
                 //     thanh toan thanh cong
-                // this.dialogNotify("Purchase unsuccessfully!");
+                this.dialogNotify("Purchase unsuccessfully!");
                 //     update to server
             }
         }
     }
-    
+
     dialogNotify(message) {
-        resources.load("PopUp/Dialog", (err, asset) => {
+        //load bằng scene
+        //mở popup lên
+        this.dialog.node.active = true;
+        this.dialog.init();
+        //set nội dung cho popup
+        this.labelDialog.string = message;
+        //click để tắt popup
+        this.buttonDialog.node.on(Node.EventType.TOUCH_END, this.buttonDialogClick, this);
+
+        // load bằng resource
+        /* resources.load('dialog-notify', SpriteFrame, (err, spriteFrame) => {
+            if (err) {
+                console.error("Failed to load spriteFrame: ${err}");
+                return;
+            }
+            let nodeDialog = new Node('Sprite');
+            let sprite = nodeDialog.addComponent(Sprite);
+            sprite.spriteFrame = spriteFrame;
+
+            let canvasNode = director.getScene().getChildByName('Canvas');
+            if (canvasNode) {
+                canvasNode.addChild(nodeDialog);
+            }
+
+            const st = director.getScene().getChildByName('Canvas').addChild(nodeDialog);
+            // st.setContent(message);
+        }) */
+
+        /* resources.load('dialog-notify', (err, asset) => {
             var nodeLoading = instantiate(asset as Prefab);
-            director.getScene().getChildByName("Canvas").addChild(nodeLoading);
+            const st = director.getScene().getChildByName("Canvas").addChild(nodeLoading);
+            //    st.setContent(message);
 
             // const st = director
             //     .getScene()
             //     .getChildByName("Canvas")
             //     .getChildByName("Dialog").getComponent(Dialog);
-            //
-            // st.setContent(message);
-        });
 
+            // st.setContent(message);
+        }); */
+
+    }
+    buttonDialogClick() {
+        this.dialog.onClickEsc();
     }
 
     handlePurchaseSuccess(productId) {
@@ -56,7 +102,7 @@ export class ShopUI extends Component {
         if (productId === 'com.chienbinh.0.99') {
 
             // mua thanh cong
-            // this.dialogNotify("Purchase successfully!");
+            this.dialogNotify("Purchase successfully!");
         }
 
     }
@@ -69,10 +115,7 @@ export class ShopUI extends Component {
             GateNativeBridge.purchaseProduct(productId);
         } else {
             setTimeout(() => {
-                callByNative("iap", {
-                    state: "success",
-                    productId: productId,
-                });
+                callByNative("iap", { state: "success", productId: productId, });
             }, 500);
         }
     }
