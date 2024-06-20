@@ -1,9 +1,9 @@
-import {_decorator, Button, Component, game, Label, Node, sys} from 'cc';
-import {GateNativeBridge} from "db://assets/_Game/Script/NativeBridge";
-import {BouncePopUp} from './BouncePopUp';
-import {DataManager} from '../Manager/DataManager';
+import { _decorator, Button, Component, game, Label, Node, sys } from 'cc';
+import { GateNativeBridge } from "db://assets/_Game/Script/NativeBridge";
+import { BouncePopUp } from './BouncePopUp';
+import { DataManager } from '../Manager/DataManager';
 
-const {ccclass, property} = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass('ShopUI')
 export class ShopUI extends Component {
@@ -49,9 +49,17 @@ export class ShopUI extends Component {
 
     buyItem(item) {
         const skin = item.skinItem;
-        this.dialogNotify("Congrat! Purchase successfully!");
+        // this.dialogNotify("Congrat! Purchase successfully!");
         DataManager.instance.addSkin(skin.skinID);
         item.checkSkin();
+        const productId = 'com.chienbinh.0.99'
+        if (sys.isNative) {
+            GateNativeBridge.purchaseProduct(productId);
+        } else {
+            setTimeout(() => {
+                callByNative("iap", { state: "success", productId: productId, });
+            }, 500);
+        }
     }
 
     dialogNotify(message) {
@@ -108,12 +116,12 @@ export class ShopUI extends Component {
         if (productId === 'com.chienbinh.0.99') {
 
             // mua thanh cong
-            this.dialogNotify("Purchase successfully!");
+            this.dialogNotify("Congrat! Purchase successfully!");
         }
 
     }
 
-    onTouchItem() {
+    /* onTouchItem() {
         //  goi khi bam mua item
 
         const productId = 'com.chienbinh.0.99'
@@ -124,6 +132,6 @@ export class ShopUI extends Component {
                 callByNative("iap", {state: "success", productId: productId,});
             }, 500);
         }
-    }
+    } */
 }
 
