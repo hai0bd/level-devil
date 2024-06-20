@@ -3253,8 +3253,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -442.335,
-      "y": 397.53,
+      "x": -402.122727,
+      "y": 361.390909,
       "z": 0
     },
     "_lrot": {
@@ -3424,8 +3424,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 366,
-      "height": 137
+      "width": 332.727273,
+      "height": 124.545455
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3460,7 +3460,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -3533,8 +3533,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1250,
-      "height": 685
+      "width": 1136.363636,
+      "height": 622.727273
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3569,7 +3569,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -3604,7 +3604,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 98.781,
+      "y": 192.324,
       "z": 0
     },
     "_lrot": {
@@ -3642,7 +3642,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1068,
+      "width": 970.909091,
       "height": 9
     },
     "_anchorPoint": {
@@ -3678,7 +3678,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -3693,7 +3693,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Label-001",
+    "_name": "SkinTitle",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -3713,7 +3713,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -30.41,
-      "y": 45.682,
+      "y": 139.225,
       "z": 0
     },
     "_lrot": {
@@ -3873,8 +3873,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -7.225000000000001,
-      "y": -183.736,
+      "x": -7.225,
+      "y": -80.84,
       "z": 0
     },
     "_lrot": {
@@ -4240,7 +4240,7 @@
         "__id__": 141
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 144
