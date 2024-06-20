@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
 import { Skin } from '../Node/Skin';
 import { DataManager } from '../Manager/DataManager';
+import { GameManager } from '../Manager/GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerSkinUI')
@@ -12,7 +13,7 @@ export class PlayerSkinUI extends Component {
     listGameSkin: Skin[];
     playerSkinData: string[];
 
-    currentSkin: Skin;
+    skin: Skin;
 
     testDtMN: number;
 
@@ -23,6 +24,10 @@ export class PlayerSkinUI extends Component {
         this.playerSkinData = DataManager.instance.playerData.skinID;
 
         this.spawnCurrentSkin(this.skinIndex);
+    }
+
+    onDisable(){
+        GameManager.instance.playerSkin = this.skin;
     }
 
     nextSkin() {
@@ -38,8 +43,8 @@ export class PlayerSkinUI extends Component {
     }
 
     spawnCurrentSkin(index: number) {
-        this.currentSkin = this.findSkin(this.playerSkinData[index]);
-        this.skinSprite.spriteFrame = this.currentSkin.sprite;
+        const skin = this.findSkin(this.playerSkinData[index]);
+        this.skinSprite.spriteFrame = skin.sprite;
         DataManager.instance.playerData.curentSkin = this.skinIndex;
     }
     findSkin(id: string): Skin {

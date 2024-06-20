@@ -1,10 +1,17 @@
 import { AnimationClip, Component, SpriteFrame, _decorator, Animation, CCFloat, animation } from "cc";
+import { test } from "./test";
+import { DataManager } from "./Manager/DataManager";
+import { Skin } from "./Node/Skin";
+import { GameManager } from "./Manager/GameManager";
 
 
 const { ccclass, property } = _decorator;
 
 @ccclass
 export default class MyAnimationClass extends Component {
+    @property(Animation)
+    anim: Animation;
+
     @property([SpriteFrame])
     frames: SpriteFrame[] = [];
 
@@ -18,30 +25,61 @@ export default class MyAnimationClass extends Component {
     sample: number;
 
     start() {
-        // Kiểm tra nếu có frames
-        if (this.frames.length > 0) {
-            this.createAnimationFromFrames(this.frames, this.keyFrames, this.speed, this.sample);
-        }
+        const skin = GameManager.instance.playerSkin;
+        this.setSkin(skin)
     }
 
-    createAnimationFromFrames(frames: SpriteFrame[], keyframes: number[], speed, sample: number) {
+    setSkin(skin: Skin) {
+        this.animIdle(skin.idleAnim);
+        this.animRun(skin.runAnim);
+        this.animJump(skin.jumpAnim);
+    }
+
+    animIdle(frames: SpriteFrame[]) {
+        this.createAnimationFromFrames(
+            frames,
+            [0, 10],
+            AnimationClip.WrapMode.Loop,
+            3,
+            15,
+            "run"
+        );
+    }
+
+    animRun(frames: SpriteFrame[]) {
+        this.createAnimationFromFrames(
+            frames,
+            [0, 1, 10, 15],
+            AnimationClip.WrapMode.Loop,
+            3,
+            15,
+            "run"
+        );
+    }
+
+    animJump(frames: SpriteFrame[]) {
+        this.createAnimationFromFrames(
+            frames,
+            [0, 4, 23, 26],
+            AnimationClip.WrapMode.Loop,
+            3,
+            15,
+            "run"
+        );
+    }
+
+    createAnimationFromFrames(frames: SpriteFrame[], keyframes: number[], wrapMode: AnimationClip.WrapMode, speed, sample: number, name: string) {
         // Tạo một Animation Clip mới
         let animationClip = this.createWithSpriteFrames(frames, sample, keyframes, speed)
-        animationClip.name = "customAnimation";
+        animationClip.name = name;
 
-        animationClip.wrapMode = AnimationClip.WrapMode.Loop;
-
-        // Tạo Animation component nếu chưa có
-        let animation = this.node.getComponent(Animation);
-        if (!animation) {
-            animation = this.node.addComponent(Animation);
-        }
+        animationClip.wrapMode = wrapMode;
 
         // Thêm Animation Clip vào Animation component
-        animation.addClip(animationClip);
+        this.anim.addClip(animationClip);
 
         // Chạy Animation
-        animation.play("customAnimation");
+        this.anim.play("test");
     }
 
     public createWithSpriteFrames(spriteFrames: SpriteFrame[], sample, keyFrames: number[], speed: number) {
@@ -58,6 +96,7 @@ export default class MyAnimationClass extends Component {
         })
         curve.assignSorted(spriteFrames.map((spriteFrame, index) => [keyFrames[index] / (sample * speed), spriteFrame]));
         clip.addTrack(track);
+
         return clip;
     }
 

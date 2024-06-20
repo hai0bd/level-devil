@@ -5,6 +5,7 @@ import { Gate } from "../Node/Gate";
 import { AudioSourceControl } from "./AudioSourceControl";
 import { MapUI } from "../UI/MapUI";
 import { UIManager } from "../UI/UIManager";
+import { Skin } from "../Node/Skin";
 const { ccclass, property } = _decorator;
 
 @ccclass("GameManager")
@@ -24,6 +25,7 @@ export class GameManager extends Component {
 
     gate: Node;
     gateControl: Gate;
+    playerSkin: Skin;
 
     currentGateIndex: number = 0;
 

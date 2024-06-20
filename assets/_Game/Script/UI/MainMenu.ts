@@ -16,10 +16,10 @@ export class MainMenu extends Component {
 
     onButtonStartClick() {
         this.playSfx(SoundType.Button_Click);
+        DataManager.instance.saveData();
         this.node.active = false;
         this.map.node.active = true;
         this.map.init();
-        DataManager.instance.saveData();
     }
 
     onButtonOptionClick() {

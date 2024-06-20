@@ -9,6 +9,15 @@ export class Skin {
     @property(SpriteFrame)
     sprite: SpriteFrame;
 
+    @property(SpriteFrame)
+    runAnim: SpriteFrame[] = [];
+
+    @property(SpriteFrame)
+    idleAnim: SpriteFrame[] = [];
+
+    @property(SpriteFrame)
+    jumpAnim: SpriteFrame[] = [];
+
     @property(CCFloat)
     price: number = 0.99;
 }

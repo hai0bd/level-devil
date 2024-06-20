@@ -29,7 +29,6 @@ export class DataManager extends Component {
 
     start() {
         this.loadPlayerData();
-        this.showPlayerData();
     }
 
     loadPlayerData() {
@@ -38,12 +37,6 @@ export class DataManager extends Component {
             this.playerData = JSON.parse(data);
         }
         else this.playerData = new PlayerData();
-    }
-
-    showPlayerData() {
-        for (let i = 0; i < this.playerData.skinID.length; i++) {
-            console.log(this.playerData.skinID);
-        }
     }
 
     findSkin(id: string): Skin {
