@@ -1,6 +1,8 @@
 import { _decorator, Button, Component, director, game, instantiate, Label, Node, Prefab, resources, Sprite, SpriteFrame, sys } from 'cc';
 import { GateNativeBridge } from "db://assets/_Game/Script/NativeBridge";
 import { BouncePopUp } from './BouncePopUp';
+import { Skin } from '../Node/Skin';
+import { DataManager } from '../Manager/DataManager';
 
 const { ccclass, property } = _decorator;
 
@@ -15,12 +17,9 @@ export class ShopUI extends Component {
     @property(Button)
     buttonDialog: Button;
 
-    start() {
-        this.dialogNotify("Test hien popup");
-    }
-
     onLoad() {
         game.on("ON_NATIVE_MESSAGE", this.handleIap, this);
+        game.on("buyItem", this.buyItem, this);
     }
 
     onDisable() {
@@ -47,6 +46,13 @@ export class ShopUI extends Component {
                 //     update to server
             }
         }
+    }
+
+    buyItem(item) {
+        const skin = item.skinItem;
+        this.dialogNotify("Da mua thanh cong");
+        DataManager.instance.addSkin(skin.skinID);
+        item.checkSkin();
     }
 
     dialogNotify(message) {

@@ -2,13 +2,15 @@ import { _decorator, Component, instantiate, Node, Prefab } from 'cc';
 import { Skin } from '../Node/Skin';
 import { SkinItemUI } from './SkinItemUI';
 import { DataManager } from '../Manager/DataManager';
-import { GameManager } from '../Manager/GameManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('SpawnItemSkin')
 export class SpawnItemSkin extends Component {
     @property(Prefab)
     itemPrefab: Prefab = null;
+
+    @property(Node)
+    contentItems: Node;
 
     item: Node;
     listSkin: Skin[];
@@ -23,10 +25,9 @@ export class SpawnItemSkin extends Component {
 
     spawnItems(item: Skin) {
         this.item = instantiate(this.itemPrefab);
-        this.node.addChild(this.item);
+        this.contentItems.addChild(this.item);
         this.skinItemsUI = this.item.getComponent(SkinItemUI);
-        this.skinItemsUI.init(item)
-
+        this.skinItemsUI.init(item, this.node);
     }
 }
 
