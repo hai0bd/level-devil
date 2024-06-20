@@ -1,10 +1,9 @@
-import { _decorator, Button, Component, director, game, instantiate, Label, Node, Prefab, resources, Sprite, SpriteFrame, sys } from 'cc';
-import { GateNativeBridge } from "db://assets/_Game/Script/NativeBridge";
-import { BouncePopUp } from './BouncePopUp';
-import { Skin } from '../Node/Skin';
-import { DataManager } from '../Manager/DataManager';
+import {_decorator, Button, Component, game, Label, Node, sys} from 'cc';
+import {GateNativeBridge} from "db://assets/_Game/Script/NativeBridge";
+import {BouncePopUp} from './BouncePopUp';
+import {DataManager} from '../Manager/DataManager';
 
-const { ccclass, property } = _decorator;
+const {ccclass, property} = _decorator;
 
 @ccclass('ShopUI')
 export class ShopUI extends Component {
@@ -50,7 +49,7 @@ export class ShopUI extends Component {
 
     buyItem(item) {
         const skin = item.skinItem;
-        this.dialogNotify("Da mua thanh cong");
+        this.dialogNotify("Congrat! Purchase successfully!");
         DataManager.instance.addSkin(skin.skinID);
         item.checkSkin();
     }
@@ -98,6 +97,7 @@ export class ShopUI extends Component {
         }); */
 
     }
+
     buttonDialogClick() {
         this.dialog.onClickEsc();
     }
@@ -121,7 +121,7 @@ export class ShopUI extends Component {
             GateNativeBridge.purchaseProduct(productId);
         } else {
             setTimeout(() => {
-                callByNative("iap", { state: "success", productId: productId, });
+                callByNative("iap", {state: "success", productId: productId,});
             }, 500);
         }
     }
