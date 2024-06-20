@@ -17,6 +17,8 @@ export class PlayerSkinUI extends Component {
     testDtMN: number;
 
     start() {
+        // console.log(DataManager.instance.playerData.curentSkin);
+        this.skinIndex = DataManager.instance.playerData.curentSkin;
         this.listGameSkin = DataManager.instance.listGameSkin;
         this.playerSkinData = DataManager.instance.playerData.skinID;
 
@@ -38,6 +40,7 @@ export class PlayerSkinUI extends Component {
     spawnCurrentSkin(index: number) {
         this.currentSkin = this.findSkin(this.playerSkinData[index]);
         this.skinSprite.spriteFrame = this.currentSkin.sprite;
+        DataManager.instance.playerData.curentSkin = this.skinIndex;
     }
     findSkin(id: string): Skin {
         for (let i = 0; i < this.listGameSkin.length; i++) {

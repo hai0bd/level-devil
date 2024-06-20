@@ -23,6 +23,7 @@ export class ShopUI extends Component {
 
     onDisable() {
         game.off("ON_NATIVE_MESSAGE", this.handleIap, this);
+        DataManager.instance.saveData();
     }
 
     handleIap(data) {

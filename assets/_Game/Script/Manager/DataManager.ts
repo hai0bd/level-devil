@@ -77,10 +77,12 @@ export class PlayerData {
     deathTimes: number;
     gate: number;
     skinID: string[] = [];
+    curentSkin: number;
 
     constructor() {
         this.deathTimes = 10;
         this.gate = 0;
         this.skinID = ["0"];
+        this.curentSkin = 0;
     }
 }
