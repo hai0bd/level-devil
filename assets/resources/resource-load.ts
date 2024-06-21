@@ -1,4 +1,4 @@
-import { _decorator, Canvas, Component, director, Node, path, resources, Sprite, SpriteFrame, Vec3 } from 'cc';
+import { _decorator, Canvas, Component, director, Node, path, resources, Sprite, SpriteAtlas, SpriteFrame, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('resource_load')
@@ -36,7 +36,7 @@ export class resource_load extends Component {
     } */
     currentPosX: number = -50;
     start() {
-        resources.loadDir("Skins/" + "0" + "/JumpAnim", SpriteFrame, function (err, assets) {
+        /* resources.loadDir("Skins/" + "0" + "/JumpAnim", SpriteFrame, function (err, assets) {
             if (err) {
                 console.log("Error");
                 return;
@@ -51,13 +51,14 @@ export class resource_load extends Component {
 
                 director.getScene().getChildByName("Canvas").addChild(spriteNode);
             })
-        })
-        /* resources.load("fbf/idle/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+        }) */
+        resources.load("fbf/idle/spriteFrame", SpriteAtlas, (err, spriteatlas) => {
             if (err) {
                 console.log("Error");
             }
-            this.node.getComponent(Sprite).spriteFrame = spriteFrame;
-        }) */
+            const atlas = spriteatlas.getSpriteFrames();
+            // atlas.forEach()
+        })
     }
 }
 

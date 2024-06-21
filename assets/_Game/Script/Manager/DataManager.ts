@@ -31,72 +31,41 @@ export class DataManager extends Component {
 
     start() {
         this.loadPlayerData();
-        console.log(this.playerData);
-        // this.setSkinData();
-        // this.testResources();
-    }
-    testResources() {
-        const path = "Skins/0/IdleAnim";
-        let sprites: SpriteFrame[] = [];
-
-        resources.loadDir(path, SpriteFrame, function (err, assets) {
-            if (err) {
-                console.log("Load failed");
-                return;
-            }
-            sprites = assets;
-        })
-        console.log(sprites);
     }
 
     setSkinData() {
         for (let i = 0; i <= this.listGameSkin.length; i++) {
             const index = i.toString();
             this.listGameSkin[i].skinID = index;
-            console.log(this.listGameSkin[i].skinID);
 
             //set idle anim
-            console.log(this.setIdleSpriteFrame(index));
+            resources.loadDir("Skins/" + index + "/IdleAnim", SpriteFrame, (err, assets) => {
+                if (err) {
+                    console.log("Failed to load sprite");
+                    return;
+                }
+                this.listGameSkin[i].idleAnim = assets;
+            })
 
-            //set run anim
-            console.log(this.setRunSpriteFrame(index));
+            resources.loadDir("Skins/" + index + "/RunAnim", SpriteFrame, (err, assets) => {
+                if (err) {
+                    console.log("Failed to load sprite");
+                    return;
+                }
+                this.listGameSkin[i].runAnim = assets;
+            })
 
-            //set jump anim
-            console.log(this.setJumpSpriteFrame(index));
+            resources.loadDir("Skins/" + index + "/JumpAnim", SpriteFrame, (err, assets) => {
+                if (err) {
+                    console.log("Failed to load sprite");
+                    return;
+                }
+                this.listGameSkin[i].jumpAnim = assets;
+            })
 
+            //set main skin
+            this.listGameSkin[i].sprite = this.listGameSkin[i].idleAnim[0];
         }
-    }
-
-    setIdleSpriteFrame(index: string) {
-        resources.loadDir("Skins/" + index + "/IdleAnim", SpriteFrame, function (err, assets) {
-            if (err) {
-                console.log("Failed to load sprite");
-                return;
-            }
-            console.log(assets);
-            return assets;
-        })
-
-    }
-    setRunSpriteFrame(index: string) {
-        resources.loadDir("Skins/" + index + "/RunAnim", SpriteFrame, function (err, assets) {
-            if (err) {
-                console.log("Failed to load sprite");
-                return;
-            }
-            console.log(assets);
-            return assets;
-        })
-    }
-    setJumpSpriteFrame(index: string) {
-        resources.loadDir("Skins/" + index + "/JumpAnim", SpriteFrame, function (err, assets) {
-            if (err) {
-                console.log("Failed to load sprite");
-                return;
-            }
-            console.log(assets);
-            return assets;
-        })
     }
 
     loadPlayerData() {
