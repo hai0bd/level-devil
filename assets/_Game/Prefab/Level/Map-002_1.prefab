@@ -3858,7 +3858,7 @@
     ],
     "timeSpeed": 0.2,
     "delayTime": 0,
-    "_id": "78nMGbQn1JrK+/NgSupYiq"
+    "_id": "d4PMjeHxBLm7yn+FW0orCP"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -11529,8 +11529,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 43.5,
-      "height": 57
+      "width": 256,
+      "height": 256
     }
   },
   {

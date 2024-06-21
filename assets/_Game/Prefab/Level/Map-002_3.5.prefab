@@ -961,6 +961,8 @@
       "__id__": 0
     },
     "fileId": "e5CnvZH3ZBoJ97p2Ytjwiy",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -4216,7 +4218,7 @@
     ],
     "timeSpeed": 0.2,
     "delayTime": 0,
-    "_id": "b3rwnpsMRCyat80EbQZbB/"
+    "_id": "52yvtdaxVFZ4hvB4sNobOf"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -11892,8 +11894,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 43.5,
-      "height": 57
+      "width": 256,
+      "height": 256
     }
   },
   {

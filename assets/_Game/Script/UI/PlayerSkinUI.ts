@@ -19,14 +19,14 @@ export class PlayerSkinUI extends Component {
 
     start() {
         // console.log(DataManager.instance.playerData.curentSkin);
-        this.skinIndex = DataManager.instance.playerData.curentSkin;
         this.listGameSkin = DataManager.instance.listGameSkin;
         this.playerSkinData = DataManager.instance.playerData.skinID;
+        this.skinIndex = DataManager.instance.playerData.curentSkin;
 
         this.spawnCurrentSkin(this.skinIndex);
     }
 
-    onDisable(){
+    onDisable() {
         GameManager.instance.playerSkin = this.skin;
         console.log(GameManager.instance.playerSkin);
     }
@@ -44,7 +44,9 @@ export class PlayerSkinUI extends Component {
     }
 
     spawnCurrentSkin(index: number) {
+        // console.log(index);
         this.skin = this.findSkin(this.playerSkinData[index]);
+        // console.log(this.skin);
         this.skinSprite.spriteFrame = this.skin.sprite;
         DataManager.instance.playerData.curentSkin = this.skinIndex;
     }

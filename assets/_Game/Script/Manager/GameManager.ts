@@ -46,6 +46,7 @@ export class GameManager extends Component {
 
     screenShake() {
         this.mainCamera.init();
+        // console.log("GM: screen shake");
     }
 
     nextGate() {

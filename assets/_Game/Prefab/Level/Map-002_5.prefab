@@ -4670,7 +4670,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": -586.954,
+      "x": 648.984,
       "y": -85.592,
       "z": 0
     }
@@ -4800,7 +4800,7 @@
     ],
     "timeSpeed": 0.2,
     "delayTime": 0,
-    "_id": "a7PvdlF0xGSJZj4/L4hjVg"
+    "_id": "9f2RSKQmFOfpxxAxYWX46E"
   },
   {
     "__type__": "cc.CompPrefabInfo",
@@ -12476,8 +12476,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 43.5,
-      "height": 57
+      "width": 256,
+      "height": 256
     }
   },
   {
@@ -12496,8 +12496,8 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 1321.098,
-      "y": -80.555,
+      "x": 0,
+      "y": 36.101,
       "z": 0
     }
   },

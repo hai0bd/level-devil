@@ -2209,6 +2209,8 @@
       "__id__": 0
     },
     "fileId": "e5CnvZH3ZBoJ97p2Ytjwiy",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -3370,8 +3372,8 @@
     ],
     "value": {
       "__type__": "cc.Size",
-      "width": 43.5,
-      "height": 57
+      "width": 256,
+      "height": 256
     }
   },
   {
@@ -4563,6 +4565,8 @@
       "__id__": 0
     },
     "fileId": "cbpW4vCQZCqrZ+sF5jfS72",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {

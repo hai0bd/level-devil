@@ -1,4 +1,4 @@
-import { _decorator, Component, Game, Node, sys } from 'cc';
+import { _decorator, assert, Component, Game, Node, resources, SpriteFrame, sys } from 'cc';
 import { Skin } from '../Node/Skin';
 const { ccclass, property } = _decorator;
 
@@ -25,10 +25,78 @@ export class DataManager extends Component {
         } else {
             this.destroy();
         }
+        // this.testResources();
+        // this.setSkinData();
     }
 
     start() {
         this.loadPlayerData();
+        console.log(this.playerData);
+        // this.setSkinData();
+        // this.testResources();
+    }
+    testResources() {
+        const path = "Skins/0/IdleAnim";
+        let sprites: SpriteFrame[] = [];
+
+        resources.loadDir(path, SpriteFrame, function (err, assets) {
+            if (err) {
+                console.log("Load failed");
+                return;
+            }
+            sprites = assets;
+        })
+        console.log(sprites);
+    }
+
+    setSkinData() {
+        for (let i = 0; i <= this.listGameSkin.length; i++) {
+            const index = i.toString();
+            this.listGameSkin[i].skinID = index;
+            console.log(this.listGameSkin[i].skinID);
+
+            //set idle anim
+            console.log(this.setIdleSpriteFrame(index));
+
+            //set run anim
+            console.log(this.setRunSpriteFrame(index));
+
+            //set jump anim
+            console.log(this.setJumpSpriteFrame(index));
+
+        }
+    }
+
+    setIdleSpriteFrame(index: string) {
+        resources.loadDir("Skins/" + index + "/IdleAnim", SpriteFrame, function (err, assets) {
+            if (err) {
+                console.log("Failed to load sprite");
+                return;
+            }
+            console.log(assets);
+            return assets;
+        })
+
+    }
+    setRunSpriteFrame(index: string) {
+        resources.loadDir("Skins/" + index + "/RunAnim", SpriteFrame, function (err, assets) {
+            if (err) {
+                console.log("Failed to load sprite");
+                return;
+            }
+            console.log(assets);
+            return assets;
+        })
+    }
+    setJumpSpriteFrame(index: string) {
+        resources.loadDir("Skins/" + index + "/JumpAnim", SpriteFrame, function (err, assets) {
+            if (err) {
+                console.log("Failed to load sprite");
+                return;
+            }
+            console.log(assets);
+            return assets;
+        })
     }
 
     loadPlayerData() {
@@ -39,20 +107,13 @@ export class DataManager extends Component {
         else this.playerData = new PlayerData();
     }
 
-    findSkin(id: string): Skin {
-        for (let i = 0; i < this.listGameSkin.length; i++) {
-            if (this.listGameSkin[i].skinID == id) return this.listGameSkin[i];
-        }
-        return null;
-    }
-
     addSkin(skinID: string) {
         if (this.playerData.skinID.indexOf(skinID) == -1) {
             this.playerData.skinID.push(skinID);
         }
     }
 
-    deathTimesPlus() {
+    deathTimesAccrete() {
         this.playerData.deathTimes++;
     }
 
@@ -64,6 +125,17 @@ export class DataManager extends Component {
         var jsonData = JSON.stringify(this.playerData);
         sys.localStorage.setItem(this.keyPlayerData, jsonData);
     }
+
+    resetData() {
+        sys.localStorage.clear();
+    }
+
+    /* findSkin(id: string): Skin {
+        for (let i = 0; i < this.listGameSkin.length; i++) {
+            if (this.listGameSkin[i].skinID == id) return this.listGameSkin[i];
+            }
+            return null;
+            } */
 }
 
 export class PlayerData {

@@ -24,7 +24,8 @@ export class MainMenu extends Component {
 
     onButtonOptionClick() {
         this.playSfx(SoundType.Button_Click);
-        GameManager.instance.screenShake();
+        DataManager.instance.resetData();
+        // GameManager.instance.screenShake();
     }
 
     onButtonShopClick() {
