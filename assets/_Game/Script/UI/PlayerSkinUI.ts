@@ -28,6 +28,7 @@ export class PlayerSkinUI extends Component {
 
     onDisable(){
         GameManager.instance.playerSkin = this.skin;
+        console.log(GameManager.instance.playerSkin);
     }
 
     nextSkin() {
@@ -43,8 +44,8 @@ export class PlayerSkinUI extends Component {
     }
 
     spawnCurrentSkin(index: number) {
-        const skin = this.findSkin(this.playerSkinData[index]);
-        this.skinSprite.spriteFrame = skin.sprite;
+        this.skin = this.findSkin(this.playerSkinData[index]);
+        this.skinSprite.spriteFrame = this.skin.sprite;
         DataManager.instance.playerData.curentSkin = this.skinIndex;
     }
     findSkin(id: string): Skin {

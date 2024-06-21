@@ -46,12 +46,14 @@ export class PlayerController extends Component {
     update(deltaTime: number) {
         if (this.canMove) {
             this.move();
-        } else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
+        // } else if (!this.isJumping) this.ChangeAnim("PlayerIdle");
+        } else if (!this.isJumping) this.ChangeAnim("idle");
     }
 
     move() {
         if (!this.isJumping) {
-            this.ChangeAnim("PlayerMove");
+            // this.ChangeAnim("PlayerMove");
+            this.ChangeAnim("run");
         }
         this.node.getPosition(this.playerPos);
         // this.playerPos = new Vec3(this.playerPos.x += (this.inputDirection.x * this.speed), this.playerPos.y += (this.inputDirection.y * this.jumpSpeed), 0);
@@ -92,7 +94,8 @@ export class PlayerController extends Component {
 
         this.playerRb.applyLinearImpulseToCenter(new Vec2(0, this.jumpForce), true);
 
-        const animName = "PlayerJump";
+        // const animName = "PlayerJump";
+        const animName = "jump";
         if (this.currentAnim != animName) {
             this.currentAnim = animName;
         }

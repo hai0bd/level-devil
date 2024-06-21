@@ -1,6 +1,4 @@
 import { AnimationClip, Component, SpriteFrame, _decorator, Animation, CCFloat, animation } from "cc";
-import { test } from "./test";
-import { DataManager } from "./Manager/DataManager";
 import { Skin } from "./Node/Skin";
 import { GameManager } from "./Manager/GameManager";
 
@@ -26,7 +24,8 @@ export default class MyAnimationClass extends Component {
 
     start() {
         const skin = GameManager.instance.playerSkin;
-        this.setSkin(skin)
+        console.log(skin);
+        this.setSkin(skin);
     }
 
     setSkin(skin: Skin) {
@@ -42,7 +41,7 @@ export default class MyAnimationClass extends Component {
             AnimationClip.WrapMode.Loop,
             3,
             15,
-            "run"
+            "idle"
         );
     }
 
@@ -61,10 +60,10 @@ export default class MyAnimationClass extends Component {
         this.createAnimationFromFrames(
             frames,
             [0, 4, 23, 26],
-            AnimationClip.WrapMode.Loop,
+            AnimationClip.WrapMode.Normal,
             3,
             15,
-            "run"
+            "jump"
         );
     }
 
@@ -79,42 +78,20 @@ export default class MyAnimationClass extends Component {
         this.anim.addClip(animationClip);
 
         // Chạy Animation
-        this.anim.play("test");
+        // this.anim.play("test");
+        if (name === "idle") this.anim.defaultClip = animationClip;
     }
 
     public createWithSpriteFrames(spriteFrames: SpriteFrame[], sample, keyFrames: number[], speed: number) {
         const clip = new AnimationClip();
         clip.sample = sample;
-        console.log(clip.sample);
         clip.duration = 1 / speed;
-        console.log(clip.duration)
         const track = new animation.ObjectTrack<SpriteFrame>();
         track.path = new animation.TrackPath().toComponent('cc.Sprite').toProperty('spriteFrame');
         const curve = track.channels()[0].curve;
-        spriteFrames.map((spriteFrame, index) => {
-            console.log(keyFrames[index] + " " + index + " " + spriteFrame)
-        })
         curve.assignSorted(spriteFrames.map((spriteFrame, index) => [keyFrames[index] / (sample * speed), spriteFrame]));
         clip.addTrack(track);
 
         return clip;
     }
-
-    // public createWithSpriteFrames (spriteFrames: SpriteFrame[], sample: number, keyFrames: number[]) {
-    //     const clip = new AnimationClip();
-    //     clip.sample = sample || clip.sample;
-    //     clip.duration = spriteFrames.length / clip.sample;
-    //     const step = 1 / clip.sample;
-    //     const track = new animation.ObjectTrack<SpriteFrame>();
-    //     track.path =  new animation.TrackPath().toComponent('cc.Sprite').toProperty('spriteFrame');
-    //     const curve = track.channels()[0].curve;
-    //     spriteFrames.map((spriteFrame, index) => {
-    //         console.log(step * index + " " + index + " " + spriteFrame)
-    //     })
-    //     curve.assignSorted(spriteFrames.map((spriteFrame, index) => [step * index, spriteFrame]));
-    //     clip.addTrack(track);
-    //     return clip;
-    // }
-
-
 }
