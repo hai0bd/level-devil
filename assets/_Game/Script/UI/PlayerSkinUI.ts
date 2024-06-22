@@ -15,11 +15,7 @@ export class PlayerSkinUI extends Component {
 
     skin: Skin;
 
-    testDtMN: number;
-
     start() {
-        // console.log(DataManager.instance.playerData.curentSkin);
-        this.listGameSkin = DataManager.instance.listGameSkin;
         this.playerSkinData = DataManager.instance.playerData.skinID;
         this.skinIndex = DataManager.instance.playerData.curentSkin;
 
@@ -28,7 +24,8 @@ export class PlayerSkinUI extends Component {
 
     onDisable() {
         GameManager.instance.playerSkin = this.skin;
-        console.log(GameManager.instance.playerSkin);
+        // console.log(GameManager.instance.playerSkin);
+        console.log(DataManager.instance.listGameSkin);
     }
 
     nextSkin() {
@@ -44,15 +41,19 @@ export class PlayerSkinUI extends Component {
     }
 
     spawnCurrentSkin(index: number) {
-        // console.log(index);
+        console.log(index);
         this.skin = this.findSkin(this.playerSkinData[index]);
-        // console.log(this.skin);
+        if (this.skin == null) console.log("skin null");
+        else console.log(this.skin);
         this.skinSprite.spriteFrame = this.skin.sprite;
         DataManager.instance.playerData.curentSkin = this.skinIndex;
     }
+
     findSkin(id: string): Skin {
-        for (let i = 0; i < this.listGameSkin.length; i++) {
-            if (this.listGameSkin[i].skinID == id) return this.listGameSkin[i];
+        const listGameSkin = DataManager.instance.listGameSkin;
+
+        for (let i = 0; i < listGameSkin.length; i++) {
+            if (listGameSkin[i].skinID == id) return listGameSkin[i];
         }
         return null;
     }

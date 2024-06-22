@@ -1,5 +1,6 @@
 import { _decorator, assert, Component, Game, Node, resources, SpriteFrame, sys } from 'cc';
 import { Skin } from '../Node/Skin';
+import { resourceLoad } from '../resourceLoad';
 const { ccclass, property } = _decorator;
 
 @ccclass('DataManager')
@@ -11,6 +12,8 @@ export class DataManager extends Component {
 
     keyPlayerData: string = "PlayerData";
     playerData: PlayerData;
+
+    loadResources: resourceLoad;
 
     public static get instance(): DataManager {
         if (!this._instance) {
@@ -31,41 +34,6 @@ export class DataManager extends Component {
 
     start() {
         this.loadPlayerData();
-    }
-
-    setSkinData() {
-        for (let i = 0; i <= this.listGameSkin.length; i++) {
-            const index = i.toString();
-            this.listGameSkin[i].skinID = index;
-
-            //set idle anim
-            resources.loadDir("Skins/" + index + "/IdleAnim", SpriteFrame, (err, assets) => {
-                if (err) {
-                    console.log("Failed to load sprite");
-                    return;
-                }
-                this.listGameSkin[i].idleAnim = assets;
-            })
-
-            resources.loadDir("Skins/" + index + "/RunAnim", SpriteFrame, (err, assets) => {
-                if (err) {
-                    console.log("Failed to load sprite");
-                    return;
-                }
-                this.listGameSkin[i].runAnim = assets;
-            })
-
-            resources.loadDir("Skins/" + index + "/JumpAnim", SpriteFrame, (err, assets) => {
-                if (err) {
-                    console.log("Failed to load sprite");
-                    return;
-                }
-                this.listGameSkin[i].jumpAnim = assets;
-            })
-
-            //set main skin
-            this.listGameSkin[i].sprite = this.listGameSkin[i].idleAnim[0];
-        }
     }
 
     loadPlayerData() {

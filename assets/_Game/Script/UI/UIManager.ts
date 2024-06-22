@@ -23,7 +23,7 @@ export class UIManager extends Component {
     mapUI: MapUI = null;
 
     @property(GamePlayUI)
-    gamePlayUI: GamePlayUI = null;
+    playUI: GamePlayUI = null;
 
     @property(ShopUI)
     shopUI: ShopUI = null;
@@ -36,8 +36,8 @@ export class UIManager extends Component {
         }
     }
 
-    openMap(){
-        
+    openMenu(){
+        this.mainMenu.node.active = true;
     }
 }
 

@@ -1,4 +1,4 @@
-import { _decorator, Animation, Camera, Component, instantiate, Node, Prefab, UITransform } from "cc";
+import { _decorator, Animation, Camera, Component, instantiate, Node, Prefab, UI, UITransform } from "cc";
 import { MapControl } from "../Node/MapControl";
 import { ScreenShake } from "../ScreenShake";
 import { Gate } from "../Node/Gate";
@@ -13,6 +13,9 @@ export class GameManager extends Component {
     private static _instance: GameManager;
     @property(Node)
     canvas: Node | null = null;
+
+    @property(Node)
+    UIcanvas: Node | null = null;
 
     @property(ScreenShake)
     mainCamera: ScreenShake = null;
@@ -46,12 +49,14 @@ export class GameManager extends Component {
 
     screenShake() {
         this.mainCamera.init();
-        // console.log("GM: screen shake");
     }
 
     nextGate() {
         this.gate.destroy();
-        UIManager.instance.gamePlayUI.onClickEsc();
+        UIManager.instance.playUI.onClickEsc();
+        if(this.currentGateIndex + 1 > this.gatePrefab.length){
+            
+        }
         this.map.showGatePos(++this.currentGateIndex);
         // this.instantieGate(++this.currentGateIndex);
     }
