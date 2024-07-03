@@ -26,10 +26,6 @@ export class resourceLoad extends Component {
             UIManager.instance.openMenu();
         })
     }
-
-    start() {
-        // UIManager.instance.openMenu();
-    }
 }
 
 
