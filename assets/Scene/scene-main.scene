@@ -29,10 +29,10 @@
         "__id__": 26
       },
       {
-        "__id__": 28
+        "__id__": 36
       },
       {
-        "__id__": 36
+        "__id__": 28
       }
     ],
     "_active": true,
@@ -751,7 +751,7 @@
     "_enabled": true,
     "__prefab": null,
     "timeSet": 0.2,
-    "intensity": 35,
+    "intensity": 50,
     "_id": "46iOhJqzdKSbnFg3QvxeK3"
   },
   {

@@ -52,14 +52,14 @@ export class ShopUI extends Component {
         const skin = item.skinItem;
         // this.dialogNotify("Congrat! Purchase successfully!");
         DataManager.instance.addSkin(skin.skinID);
-        const productId = 'com.chienbinh.0.99'
+        /* const productId = 'com.chienbinh.0.99'
         if (sys.isNative) {
             GateNativeBridge.purchaseProduct(productId);
         } else {
             setTimeout(() => {
                 callByNative("iap", { state: "success", productId: productId, });
             }, 500);
-        }
+        } */
         item.checkSkin();
     }
 
